@@ -1,0 +1,1334 @@
+<title>OPAL Playground</title>
+<meta name="description" content="Write and check OMP OPAL macros in the browser: highlighting, autocomplete, function reference and a static checker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a single working screen — toolbar on top, editor left, problems/reference rail right; stacks on phones. */
+:root {
+  --bg: #eef1f0;
+  --panel: #f8faf9;
+  --paper: #ffffff;
+  --line: #d6dddb;
+  --line-soft: #e6ebe9;
+  --fg: #17201f;
+  --muted: #5d6b69;
+  --faint: #8b9896;
+  --accent: #0f7f78;
+  --accent-ink: #ffffff;
+  --accent-soft: #dcefec;
+  --sel: rgba(15, 127, 120, .22);
+  --err: #c2362f;
+  --err-soft: #fbe5e3;
+  --warn: #d08c00;
+  --warn-ink: #8a5700;
+  --warn-soft: #fbefd6;
+  --info: #2f63b8;
+  --info-soft: #e2eafa;
+  --ok: #1d7a43;
+  --ok-soft: #dcf1e3;
+  --gut: #f1f4f3;
+  --gut-fg: #9aa7a5;
+  --cur-line: #f2f7f6;
+  --sx-kw: #7b3fb0;
+  --sx-type: #0f7f78;
+  --sx-fn: #2459b3;
+  --sx-str: #8a5a00;
+  --sx-num: #b4461a;
+  --sx-cmt: #7f8c8a;
+  --sx-hdr: #4d7f5a;
+  --sx-const: #b02e6a;
+  --sx-dir: #9a3fa0;
+  --sx-mem: #33504d;
+  --shadow: 0 10px 30px rgba(20, 40, 38, .14), 0 2px 6px rgba(20, 40, 38, .08);
+  --f-ui: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --f-code: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --code-size: 13.5px;
+  --lh: 21px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1514; --panel: #141c1b; --paper: #111817; --line: #26312f; --line-soft: #1d2725;
+    --fg: #dfe8e6; --muted: #98a8a5; --faint: #6b7b78; --accent: #3cc2b6; --accent-ink: #062a27;
+    --accent-soft: #143633; --sel: rgba(60, 194, 182, .26); --err: #f2766d; --err-soft: #3a1e1c; --warn: #e3b04b; --warn-ink: #e3b04b; --warn-soft: #36290f;
+    --info: #7ea6ef; --info-soft: #1a2640; --ok: #5fcf8c; --ok-soft: #14301f; --gut: #131a19; --gut-fg: #4f5f5c; --cur-line: #16201f;
+    --sx-kw: #c79bf2; --sx-type: #4fd1c4; --sx-fn: #7fb0ff; --sx-str: #e2c27a; --sx-num: #f39a6b; --sx-cmt: #6f817e;
+    --sx-hdr: #7fb48b; --sx-const: #f08cb9; --sx-dir: #e08ae6; --sx-mem: #b9cfcb;
+    --shadow: 0 12px 34px rgba(0, 0, 0, .5), 0 2px 6px rgba(0, 0, 0, .35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1514; --panel: #141c1b; --paper: #111817; --line: #26312f; --line-soft: #1d2725;
+  --fg: #dfe8e6; --muted: #98a8a5; --faint: #6b7b78; --accent: #3cc2b6; --accent-ink: #062a27;
+  --accent-soft: #143633; --sel: rgba(60, 194, 182, .26); --err: #f2766d; --err-soft: #3a1e1c; --warn: #e3b04b; --warn-ink: #e3b04b; --warn-soft: #36290f;
+  --info: #7ea6ef; --info-soft: #1a2640; --ok: #5fcf8c; --ok-soft: #14301f; --gut: #131a19; --gut-fg: #4f5f5c; --cur-line: #16201f;
+  --sx-kw: #c79bf2; --sx-type: #4fd1c4; --sx-fn: #7fb0ff; --sx-str: #e2c27a; --sx-num: #f39a6b; --sx-cmt: #6f817e;
+  --sx-hdr: #7fb48b; --sx-const: #f08cb9; --sx-dir: #e08ae6; --sx-mem: #b9cfcb;
+  --shadow: 0 12px 34px rgba(0, 0, 0, .5), 0 2px 6px rgba(0, 0, 0, .35);
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 14px; }
+* { box-sizing: border-box; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.app { height: 100%; display: flex; flex-direction: column; padding-inline: 16px; padding-block: 12px; gap: 12px; }
+.bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; margin-right: auto; min-width: 0; }
+.gem { width: 26px; height: 26px; border-radius: 7px 7px 13px 13px; flex: none;
+  background: conic-gradient(from 210deg at 45% 40%, #8fe3d6, #b9a7f2, #f5c9de, #9fd8f5, #8fe3d6);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 3px rgba(0,0,0,.18); }
+.brand h1 { font-size: 18px; font-weight: 700; letter-spacing: -.01em; margin: 0; white-space: nowrap; }
+.brand h1 span { color: var(--muted); font-weight: 500; }
+.tagline { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 6px 11px; cursor: pointer; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover { border-color: var(--faint); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.06); }
+select.btn { padding-right: 8px; }
+.kbd { font-family: var(--f-code); font-size: 11px; color: var(--faint); }
+
+.main { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 12px; }
+.edcol { min-width: 0; min-height: 0; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); overflow: hidden; }
+.edhead { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line-soft); background: var(--panel); min-width: 0; }
+.fname { font-family: var(--f-code); font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pills { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.pill { flex: none; display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 10px; font-size: 12.5px; font-weight: 600; background: var(--ok-soft); color: var(--ok); white-space: nowrap; }
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.err { background: var(--err-soft); color: var(--err); }
+.pill.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.pill.warn .dot { background: var(--warn); }
+.pill.info { background: var(--info-soft); color: var(--info); }
+
+.editor { position: relative; flex: 1; min-height: 0; display: flex; background: var(--paper); }
+.gutter { flex: none; width: 52px; overflow: hidden; background: var(--gut); border-right: 1px solid var(--line-soft); font-family: var(--f-code); font-size: 12px; color: var(--gut-fg); user-select: none; }
+.gutter-in { padding-block: 10px; }
+.gl { height: var(--lh); line-height: var(--lh); text-align: right; padding-right: 10px; position: relative; }
+.gl.cur { color: var(--fg); }
+.gl[data-sev]::before { content: ""; position: absolute; left: 7px; top: calc(50% - 4px); width: 8px; height: 8px; border-radius: 50%; }
+.gl[data-sev="error"]::before { background: var(--err); }
+.gl[data-sev="warning"]::before { background: var(--warn); }
+.gl[data-sev="info"]::before { background: var(--info); opacity: .7; }
+.codewrap { position: relative; flex: 1; min-width: 0; }
+.hl, .ta { position: absolute; inset: 0; margin: 0; padding: 10px 14px; font-family: var(--f-code); font-size: var(--code-size); line-height: var(--lh); white-space: pre; tab-size: 3; letter-spacing: 0; font-variant-ligatures: none; overflow: auto; }
+.hl { color: var(--fg); pointer-events: none; overflow: hidden; border: 0; }
+.ta { background: transparent; color: transparent; caret-color: var(--fg); border: 0; resize: none; outline: none; z-index: 1; }
+.ta::selection { background: var(--sel); color: transparent; }
+.hl-code { position: relative; display: block; }
+.hl, .hl *, .ta { font-family: var(--f-code) !important; font-size: var(--code-size) !important; line-height: var(--lh) !important; font-weight: 400 !important; font-style: normal !important; letter-spacing: 0 !important; word-spacing: 0 !important; font-variant-ligatures: none; vertical-align: baseline; }
+.curline { position: absolute; left: 0; right: 0; height: var(--lh); background: var(--cur-line); pointer-events: none; }
+.t-kw { color: var(--sx-kw); font-weight: 600; }
+.t-type { color: var(--sx-type); font-weight: 600; }
+.t-fn { color: var(--sx-fn); }
+.t-str { color: var(--sx-str); }
+.t-num { color: var(--sx-num); }
+.t-cmt { color: var(--sx-cmt); font-style: italic; }
+.t-hdr { color: var(--sx-hdr); }
+.t-const { color: var(--sx-const); }
+.t-dir { color: var(--sx-dir); }
+.t-mem { color: var(--sx-mem); }
+.t-label { color: var(--sx-const); font-style: italic; }
+.u-error { text-decoration: underline wavy var(--err); text-decoration-skip-ink: none; text-underline-offset: 3px; }
+.u-warning { text-decoration: underline wavy var(--warn); text-decoration-skip-ink: none; text-underline-offset: 3px; }
+.u-info { text-decoration: underline dotted var(--info); text-underline-offset: 3px; }
+
+.statusbar { display: flex; gap: 14px; align-items: center; padding: 6px 12px; border-top: 1px solid var(--line-soft); background: var(--panel); font-size: 12px; color: var(--muted); min-height: 32px; min-width: 0; }
+.sig { font-family: var(--f-code); font-size: 12px; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1; }
+.sig b { color: var(--sx-fn); font-weight: 600; }
+.sig i { color: var(--muted); font-style: normal; }
+.pos { flex: none; font-variant-numeric: tabular-nums; }
+
+.pop { position: absolute; z-index: 5; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+.ac { width: min(440px, calc(100% - 16px)); max-height: 268px; overflow: auto; padding: 4px; }
+.ac-item { display: grid; grid-template-columns: 34px minmax(0, auto) minmax(0, 1fr); gap: 8px; align-items: center; padding: 5px 8px; border-radius: 6px; cursor: pointer; font-family: var(--f-code); font-size: 12.5px; }
+.ac-item.on { background: var(--accent-soft); }
+.ac-kind { font-family: var(--f-ui); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-align: center; border: 1px solid var(--line); border-radius: 4px; padding: 1px 0; }
+.ac-kind.fn { color: var(--sx-fn); } .ac-kind.kw { color: var(--sx-kw); } .ac-kind.var { color: var(--sx-const); } .ac-kind.type { color: var(--sx-type); } .ac-kind.snip { color: var(--accent); border-color: var(--accent); }
+.ac-label { white-space: nowrap; }
+.ac-label mark { background: none; color: var(--accent); font-weight: 600; }
+.ac-detail { color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; font-size: 11.5px; }
+.ac-foot { padding: 6px 10px 4px; border-top: 1px solid var(--line-soft); margin-top: 4px; font-size: 12px; color: var(--muted); line-height: 1.45; }
+.ac-foot code { font-family: var(--f-code); color: var(--fg); font-size: 11.5px; overflow-wrap: anywhere; }
+.tip { max-width: min(460px, calc(100% - 16px)); padding: 10px 12px; font-size: 13px; line-height: 1.45; pointer-events: none; }
+.tip .tsig { font-family: var(--f-code); font-size: 12.5px; color: var(--fg); overflow-wrap: anywhere; }
+.tip .tret { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.tip .tdesc { margin-top: 6px; color: var(--fg); }
+.tip .tprob { display: flex; gap: 8px; align-items: baseline; }
+.tip .tprob + .tprob, .tip .tprob + .tsig { margin-top: 6px; }
+.tip hr { border: 0; border-top: 1px solid var(--line-soft); margin: 8px 0; }
+
+.rail { min-width: 0; min-height: 0; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); overflow: hidden; }
+.tabs { display: flex; border-bottom: 1px solid var(--line-soft); padding: 0 6px; gap: 2px; }
+.tab { border: 0; background: none; padding: 10px 10px 9px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; display: inline-flex; gap: 6px; align-items: center; }
+.tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); }
+.count { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 6px; background: var(--line-soft); color: var(--muted); font-variant-numeric: tabular-nums; }
+.pane { flex: 1; min-height: 0; overflow: auto; }
+.probs { list-style: none; margin: 0; padding: 6px; }
+.prob { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+.prob:hover, .prob:focus-visible { background: var(--paper); }
+.prob .sv { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; margin-left: 3px; }
+.prob[data-sev="error"] .sv { box-shadow: 0 0 0 3px var(--err-soft); }
+.prob[data-sev="warning"] .sv { box-shadow: 0 0 0 3px var(--warn-soft); }
+.prob[data-sev="info"] .sv { box-shadow: 0 0 0 3px var(--info-soft); }
+.prob[data-sev="error"] .sv { background: var(--err); }
+.prob[data-sev="warning"] .sv { background: var(--warn); }
+.prob[data-sev="info"] .sv { background: var(--info); }
+.prob .msg { line-height: 1.45; overflow-wrap: anywhere; }
+.prob .code { display: block; margin-top: 2px; font-family: var(--f-code); font-size: 11px; color: var(--faint); }
+.prob .ln { font-family: var(--f-code); font-size: 11.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; margin-top: 2px; }
+.empty { padding: 28px 18px; text-align: center; color: var(--muted); line-height: 1.5; }
+.empty strong { display: block; color: var(--ok); font-size: 15px; margin-bottom: 4px; }
+.filters { display: flex; gap: 6px; padding: 8px 10px 0; flex-wrap: wrap; }
+.chip { border: 1px solid transparent; border-radius: 999px; padding: 3px 10px; font-size: 12.5px; font-weight: 600; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.chip.err { background: var(--err-soft); color: var(--err); }
+.chip.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.chip.warn i { background: var(--warn); }
+.chip.info { background: var(--info-soft); color: var(--info); }
+.chip[aria-pressed="false"] { background: transparent; border-color: var(--line); color: var(--faint); }
+.chip.zero { opacity: .55; }
+.chip i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; background: currentColor; }
+
+.search { margin: 10px; display: block; width: calc(100% - 20px); border: 1px solid var(--line); background: var(--paper); border-radius: 8px; padding: 7px 10px; font-size: 13px; }
+.refgroup { padding: 4px 10px 2px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+.ref { padding: 9px 12px; border-top: 1px solid var(--line-soft); display: grid; gap: 3px; cursor: pointer; }
+.ref:hover { background: var(--paper); }
+.ref-top { display: flex; gap: 8px; align-items: baseline; min-width: 0; }
+.ref-name { font-family: var(--f-code); font-weight: 600; font-size: 13px; color: var(--sx-fn); }
+.ref-name.kw { color: var(--sx-kw); }
+.ref-ret { margin-left: auto; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; white-space: nowrap; }
+.ref-sig { font-family: var(--f-code); font-size: 11.5px; color: var(--muted); overflow-wrap: anywhere; }
+.ref-sig > div { padding-left: 1.2em; text-indent: -1.2em; }
+.ref-sig > div + div { margin-top: 2px; }
+.ref .ref-ex { white-space: pre-wrap; overflow-wrap: anywhere; }
+.unv { font-family: var(--f-ui); font-size: 10.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--warn-ink); background: var(--warn-soft); border-radius: 4px; padding: 1px 5px; }
+.ref-top .unv { margin-left: 2px; }
+.ref-ex, .tip .tex { font-family: var(--f-code); font-size: 11.5px; background: var(--gut); border: 1px solid var(--line-soft); border-radius: 6px; padding: 4px 7px; margin-top: 4px; overflow-x: auto; white-space: pre; color: var(--fg); }
+.more-ov { color: var(--muted); font-family: var(--f-ui); font-size: 11px; }
+.sig u { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; font-weight: 600; }
+.ref-cat { font-size: 11px; color: var(--faint); letter-spacing: .02em; }
+.ref-desc { font-size: 12.5px; line-height: 1.45; color: var(--fg); }
+.more { margin: 10px; }
+.rules { padding: 6px 12px 16px; display: grid; gap: 0; }
+.rules p { color: var(--muted); line-height: 1.5; margin: 6px 0 10px; }
+.rule { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-top: 1px solid var(--line-soft); font-size: 12.5px; line-height: 1.45; }
+.rule .rc { font-family: var(--f-code); font-size: 11px; font-weight: 600; }
+.rule .rs { display: block; font-family: var(--f-ui); font-weight: 500; font-size: 11px; color: var(--muted); margin-top: 1px; }
+.legend { display: grid; gap: 8px; margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-size: 12.5px; line-height: 1.4; }
+.legend > div { display: flex; gap: 8px; align-items: baseline; }
+.lg { width: 9px; height: 9px; border-radius: 50%; flex: none; display: inline-block; }
+.lg.err { background: var(--err); } .lg.warn { background: var(--warn); } .lg.info { background: var(--info); }
+.rule .rc.error { color: var(--err); } .rule .rc.warning { color: var(--warn-ink); } .rule .rc.info { color: var(--info); }
+.foot { font-size: 12px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; }
+.fb { display: none; gap: 6px; margin-top: 6px; }
+.prob:hover .fb, .prob:focus-within .fb, .prob:focus .fb { display: flex; }
+@media (hover: none) { .fb { display: flex; } }
+.fbbtn { border: 1px solid var(--line); background: var(--paper); border-radius: 6px; padding: 2px 8px; font-size: 11.5px; font-weight: 500; color: var(--muted); cursor: pointer; }
+.fbbtn:hover { color: var(--fg); border-color: var(--faint); }
+.fbbtn[aria-pressed="true"] { color: var(--ok); border-color: var(--ok); }
+.linkbtn { border: 0; background: none; padding: 0; color: var(--accent); font-size: 12px; font-weight: 500; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; justify-self: start; }
+.ref .linkbtn { opacity: 0; } .ref:hover .linkbtn, .ref:focus-within .linkbtn { opacity: 1; }
+@media (hover: none) { .ref .linkbtn { opacity: 1; } }
+.statusbar .linkbtn { flex: none; font-size: 12px; }
+.foot .linkbtn { font-size: 12px; }
+.rules-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 4px 0 6px; }
+.rule .linkbtn { margin-top: 4px; display: block; }
+.modal { position: fixed; inset: 0; z-index: 30; background: rgba(10, 20, 19, .45); display: grid; place-items: center; padding: 16px; }
+.sheet { width: min(520px, 100%); max-height: calc(100% - 16px); overflow: auto; background: var(--paper); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 18px 18px 16px; display: grid; gap: 10px; }
+.sheet h2 { margin: 0; font-size: 17px; font-weight: 700; text-wrap: balance; }
+.sheet label { font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.sheet textarea, .sheet input[type=email], .sheet select { width: 100%; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; }
+.sheet textarea { resize: vertical; min-height: 84px; font-family: var(--f-ui); }
+.field { display: grid; gap: 4px; }
+.fb-ctx { background: var(--panel); border: 1px solid var(--line-soft); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.45; overflow-wrap: anywhere; }
+.fb-ctx code { font-family: var(--f-code); font-size: 12px; }
+.chk { display: flex; gap: 8px; align-items: center; font-weight: 500 !important; color: var(--fg) !important; }
+.fb-code { margin: 0; max-height: 160px; overflow: auto; background: var(--gut); border: 1px solid var(--line-soft); border-radius: 8px; padding: 8px 10px; font-family: var(--f-code); font-size: 12px; line-height: 1.5; white-space: pre; }
+.fb-privacy { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+.fb-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.fb-note { font-size: 12.5px; line-height: 1.45; padding: 8px 10px; border-radius: 8px; background: var(--warn-soft); color: var(--fg); }
+.fb-note pre { margin: 6px 0 0; font-family: var(--f-code); font-size: 11.5px; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 180px; overflow: auto; }
+.about { padding: 6px 14px 18px; font-size: 13px; line-height: 1.55; }
+.about h3 { font-size: 13.5px; margin: 14px 0 4px; }
+.about p { margin: 0 0 8px; color: var(--fg); }
+.about .muted { color: var(--muted); font-size: 12px; margin-top: 12px; }
+.log { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 13px; z-index: 20; }
+@media (max-width: 900px) {
+  html, body { height: auto; }
+  .app { height: auto; }
+  .main { grid-template-columns: minmax(0, 1fr); }
+  .edcol { height: 64vh; min-height: 360px; }
+  .rail { height: 480px; }
+  .tagline { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) { .ac-item, .prob, .ref { transition: background-color .12s; } }
+</style>
+
+<div class="app">
+  <header class="bar">
+    <div class="brand">
+      <div class="gem" aria-hidden="true"></div>
+      <h1>OPAL <span>Playground</span></h1>
+      <div class="tagline">Write OMP macros with autocomplete and a static checker</div>
+    </div>
+    <div class="tools">
+      <label class="sr" for="examples" hidden>Example</label>
+      <select id="examples" class="btn" aria-label="Load an example"></select>
+      <button class="btn" id="btnFormat" title="Re-indent blocks (Shift+Alt+F)">Format</button>
+      <button class="btn" id="btnHeader" title="Insert the //! header template">Header</button>
+      <button class="btn primary" id="btnCopy">Copy code</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="edcol" aria-label="Editor">
+      <div class="edhead">
+        <span class="fname" id="fname">macro.opal</span>
+        <span class="pills" id="pills" aria-live="polite"></span>
+      </div>
+      <div class="editor" id="editor">
+        <div class="gutter" aria-hidden="true"><div class="gutter-in" id="gutter"></div></div>
+        <div class="codewrap" id="codewrap">
+          <pre class="hl" id="hl" aria-hidden="true"><div class="curline" id="curline"></div><div class="hl-code" id="hlcode"></div></pre>
+          <textarea class="ta" id="ta" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="OPAL code"></textarea>
+          <div class="pop ac" id="ac" role="listbox" hidden></div>
+          <div class="pop tip" id="tip" hidden></div>
+        </div>
+      </div>
+      <div class="statusbar">
+        <div class="sig" id="sig"><i>Put the cursor on a function or inside its ( ) to see its signature here · Ctrl+Space for suggestions</i></div>
+        <button class="linkbtn" id="btnMissed" title="OMP rejected code that the checker passed">Report a missed error</button>
+        <div class="pos" id="pos">Ln 1, Col 1</div>
+      </div>
+    </section>
+
+    <aside class="rail" aria-label="Problems and reference">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tab-problems" aria-selected="true" aria-controls="pane-problems">Problems <span class="count" id="probCount">0</span></button>
+        <button class="tab" role="tab" id="tab-ref" aria-selected="false" aria-controls="pane-ref">Reference</button>
+        <button class="tab" role="tab" id="tab-rules" aria-selected="false" aria-controls="pane-rules">Rules</button>
+        <button class="tab" role="tab" id="tab-about" aria-selected="false" aria-controls="pane-about">About</button>
+      </div>
+      <div class="pane" id="pane-problems" role="tabpanel">
+        <div class="filters" id="filters"></div>
+        <ul class="probs" id="probs"></ul>
+      </div>
+      <div class="pane" id="pane-ref" role="tabpanel" hidden>
+        <input class="search" id="refSearch" type="search" placeholder="Search functions, or type: unverified" aria-label="Search the reference">
+        <div id="refList"></div>
+      </div>
+      <div class="pane" id="pane-about" role="tabpanel" hidden>
+        <div class="about">
+          <h3>Your code stays on your computer</h3>
+          <p>Everything runs in your browser. The code you type is never uploaded, stored on a server or shared. The page keeps an unsent draft in your own browser only.</p>
+          <p>Feedback sends only what you see in the feedback form. Code is attached only when you tick the box, so you can work with client macros safely.</p>
+          <h3>How the checker was tested</h3>
+          <p>Every rule was tested against a large set of real-world macros. Rules that raised false alarms on working code were fixed or downgraded before release. Argument counts are based on how the functions are called in practice.</p>
+          <h3>What it cannot do</h3>
+          <p>It does not run your code and does not know your data model, so it cannot check attribute names, object types or results. Always test in OMP.</p>
+          <h3>Changelog</h3>
+          <ul class="log">
+            <li><b>v0.12</b> Feedback is now delivered (via Formspree). Stray semicolons ("Then;", ";;;") are now errors, as in OMP. For loops accept "by" for the step. New error for malformed expressions: missing operator between two values, empty ( ), stray { }. Break and Continue now need the label of an enclosing loop, as in OMP (confirmed by a user test). Sub-vectors such as V[a:b] are no longer mistaken for loop labels.</li>
+            <li><b>v0.11</b> All functions in the reference reviewed; 980+ further built-in function names added to autocomplete. New hints for deprecated functions and for To-Do list functions used without an invisible-mode guard.</li>
+            <li><b>v0.10</b> Function reference rewritten in our own words, with typed signatures, examples and an "unverified" mark where behaviour is not yet confirmed. Severities confirmed in OMP for missing return value, duplicate names and calls without Call.</li>
+            <li><b>v0.9</b> Feedback on every problem, function and rule. Report a missed error. Severity chips in the editor header.</li>
+            <li><b>v0.8</b> Missing ";" and wrong argument counts are now errors. Argument-count check for built-in functions.</li>
+            <li><b>v0.7</b> Hint for names that are declared nowhere. Header leaves an empty line before the code.</li>
+            <li><b>v0.6</b> Stricter autocomplete, signature on the function name, colour legend in Rules.</li>
+            <li><b>v0.5</b> First version: editor, autocomplete, reference, static checker.</li>
+          </ul>
+          <p class="muted">Independent tool, not affiliated with OM Partners. OMP and OPAL are names of their respective owner.</p>
+        </div>
+      </div>
+      <div class="pane" id="pane-rules" role="tabpanel" hidden>
+        <div class="rules" id="rules"></div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <span>Static checks only: the code is never executed, and runtime behaviour depends on your OMP data model.</span>
+    <span>Independent tool, not affiliated with OM Partners. <button class="linkbtn" id="btnGeneral">Send feedback</button></span>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div class="modal" id="fbModal" hidden>
+  <form class="sheet" id="fbForm" role="dialog" aria-modal="true" aria-labelledby="fbTitle" novalidate>
+    <h2 id="fbTitle">Send feedback</h2>
+    <div class="fb-ctx" id="fbCtx"></div>
+    <div class="field" id="fbKindWrap"><label for="fbKind">What is it about?</label><select id="fbKind"></select></div>
+    <div class="field"><label for="fbComment" id="fbCommentLabel">Comment</label><textarea id="fbComment" rows="4"></textarea></div>
+    <div id="fbAttachWrap" class="field">
+      <label class="chk"><input type="checkbox" id="fbAttach"> <span id="fbAttachLabel">Attach these code lines</span></label>
+      <pre class="fb-code" id="fbCode" hidden></pre>
+    </div>
+    <div class="field"><label for="fbEmail">Email (optional, only if you want a reply)</label><input id="fbEmail" type="email" autocomplete="email" placeholder="name@example.com"></div>
+    <p class="fb-privacy">Your code is only sent if you tick the box above. Remove client names, IDs and settings before you send it.</p>
+    <div class="fb-note" id="fbNote" hidden></div>
+    <div class="fb-actions"><button type="button" class="btn" id="fbCancel">Cancel</button><button type="submit" class="btn primary" id="fbSend">Send feedback</button></div>
+  </form>
+</div>
+
+<script type="application/json" id="catalog">/*CATALOG*/</script>
+<script>/*CHECKER*/</script>
+<script>
+(function () {
+'use strict';
+const $ = id => document.getElementById(id);
+const ta = $('ta'), hl = $('hl'), hlcode = $('hlcode'), gutter = $('gutter'), ac = $('ac'), tip = $('tip'), curline = $('curline'), codewrap = $('codewrap');
+const PAD_T = 10, PAD_L = 14;
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+
+// ---------- catalog ----------
+const CAT = JSON.parse($('catalog').textContent);
+const FN = new Map();
+const fmtSig = (name, ps, va) => name + '(' + ps.map(p => (p[2] ? '[' : '') + (p[0] && p[0] !== 'Any' ? p[0] + ' ' : '') + p[1] + (p[2] ? ']' : '')).join(', ') + (va ? ', …' : '') + ')';
+for (const r of CAT.ref) {
+  const sigs = r.o.map(ps => fmtSig(r.n, ps, r.va));
+  FN.set(r.n.toLowerCase(), { name: r.n, o: r.o, sigs, sig: sigs.join('\n'), ret: r.r, desc: r.d, ex: r.ex, cat: r.hc || r.c, unverified: !!(r.lv || !r.sv), named: !!r.na, uses: r.u || 0, src: 'ref' });
+}
+for (const [n, c] of Object.entries(CAT.idx || {})) if (!FN.has(n.toLowerCase())) FN.set(n.toLowerCase(), { name: n, sig: '', ret: '', desc: '', cat: c, nameOnly: true, uses: 0, src: 'index' });
+const EXTRA = {
+  Sum: ['Sum(Vector)', 'Float', 'Adds up all values in a numeric vector.'],
+  Abs: ['Abs(Number)', 'Float', 'Absolute value of a number.'],
+  CFormatter: ['CFormatter(Template, Arg0, Arg1, …)', 'String', 'Builds a string by replacing {0}, {1}, … in the template with the following arguments.'],
+  Average: ['Average(Vector)', 'Float', 'Average of the values in a numeric vector.'],
+  Ceil: ['Ceil(Number)', 'Integer', 'Rounds a number up to the nearest whole number.'],
+  Floor: ['Floor(Number)', 'Integer', 'Rounds a number down to the nearest whole number.'],
+  Mod: ['Mod(A, B)', 'Integer', 'Remainder of A divided by B.'],
+  Power: ['Power(Base, Exponent)', 'Float', 'Raises Base to the given Exponent.'],
+  Right: ['Right(String, N)', 'String', 'The last N characters of a string.'],
+  Mid: ['Mid(String, Start, Length)', 'String', 'A part of a string, starting at Start.'],
+  Lpad: ['Lpad(String, Length, PadChar)', 'String', 'Pads a string on the left up to the given length (e.g. leading zeros).'],
+  Rpad: ['Rpad(String, Length, PadChar)', 'String', 'Pads a string on the right up to the given length.'],
+  IndexOf: ['IndexOf(Vector, Value)', 'Integer', 'Position of a value in a vector (1-based).'],
+  SortVector: ['SortVector(Vector, AttributeNames)', 'Vector', 'Sorts a vector of objects on one or more attributes.'],
+  RemoveDuplicates: ['RemoveDuplicates(Vector)', 'Vector', 'Returns the vector without duplicate values.'],
+  Interrupt: ['Interrupt()', '', 'Gives the application a chance to process user interrupts during long loops.'],
+  SetSettingInMemory: ['SetSettingInMemory(Name, Value)', '', 'Changes a setting for the running session only, without saving it.'],
+  ToColor: ['ToColor(R, G, B)', 'Color', 'Builds a colour value from red, green and blue (0–255).'],
+  LocateAttribute: ['LocateAttribute("ObjectType.Attribute")', 'Object', 'Returns the attribute definition, or NULL if the attribute does not exist.'],
+  IsInvalid: ['IsInvalid(Object)', 'Integer', 'True when an object pointer refers to a deleted object.'],
+  GetExceptionMessage: ['GetExceptionMessage()', 'String', 'Inside Catch: the message of the exception that was raised.'],
+  BreakInDebugger: ['BreakInDebugger()', '', 'Stops in the OPAL debugger when it is attached.'],
+  Match: ['Match(…)', '', 'Built-in. Not described here yet; check the signature in OMP.'],
+  RemoveDuplicatesFaster: ['RemoveDuplicatesFaster(Vector)', 'Vector', 'Faster variant of RemoveDuplicates for large vectors.'],
+  SortAscending: ['SortAscending(Vector)', 'Vector', 'Sorts a vector of values in ascending order.'],
+  SortDescending: ['SortDescending(Vector)', 'Vector', 'Sorts a vector of values in descending order.'],
+};
+for (const [n, [s, r, d]] of Object.entries(EXTRA)) if (!FN.has(n.toLowerCase())) FN.set(n.toLowerCase(), { name: n, sig: s, ret: r, desc: d, uses: 0, src: 'note' });
+for (const n of CAT.names) if (!FN.has(n.toLowerCase())) FN.set(n.toLowerCase(), { name: n, sig: '', ret: '', desc: 'Built-in function. Not described here yet; suggestions welcome.', uses: 0, src: 'seen' });
+FN.set('all', Object.assign(FN.get('all') || {}, { name: 'all', sig: FN.get('all') ? FN.get('all').sig : 'all("ObjectType")', ret: 'Vector', desc: (FN.get('all') || {}).desc || 'All instances of an object type, e.g. For p in all("Product").' }));
+const GLOBALS = new Set(['globalbucketseries', 'forecastitem', 'cell', 'mode', 'pyramidnode', 'selectedpyramidnode', 'bucket', 'forecastreferencebucketseries', 'profile', 'value']);
+const ARITY = new Map(Object.entries(CAT.ar || {}).map(([k, v]) => [k, { min: v[0], max: v[1] == null ? Infinity : v[1] }]));
+const DEPRECATED = Object.fromEntries(CAT.ref.filter(r => r.dep).map(r => [r.n.toLowerCase(), r.dep]));
+const catalog = { fnSet: new Set(FN.keys()), globals: GLOBALS, arity: ARITY, deprecated: DEPRECATED };
+
+const KWDOC = {
+  If: ['If <condition> Then … ElIf … Then … Else … EndIf;', 'Conditional block. Compare with ==, combine with and / or / not. Every If needs Then and a closing EndIf;'],
+  ElIf: ['ElIf <condition> Then', 'Extra branch of an If block. One word; must come before Else.'],
+  Else: ['Else', 'Branch that runs when no condition of the If matched.'],
+  EndIf: ['EndIf;', 'Closes an If block. One word.'],
+  For: ['For i from 1 to N … EndFor;   For obj in all("Type") … EndFor;', 'Loop over a numeric range (from … to, optional step) or over the elements of a vector. The loop variable must be declared.'],
+  EndFor: ['EndFor;', 'Closes a For loop.'],
+  While: ['While <condition> … EndWhile;', 'Repeats while the condition is true. Remember to change the condition inside the loop.'],
+  EndWhile: ['EndWhile;', 'Closes a While loop.'],
+  Try: ['Try … Catch … EndCatch;', 'Runs code that may raise an exception. Handle it in the Catch branch.'],
+  Catch: ['Catch', 'Runs when the Try block raises an exception. Log with Call WriteMessage(…) or re-raise with Rethrow;'],
+  EndCatch: ['EndCatch;', 'Closes a Try … Catch block.'],
+  Rethrow: ['Rethrow;', 'Inside Catch: raises the same exception again.'],
+  Return: ['Return <value>;', 'Stops the macro and returns the value. A bare expression on the last line does the same.'],
+  Break: ['Break LoopLabel;', 'Leaves the loop marked with :LoopLabel. The label is required.'],
+  Continue: ['Continue LoopLabel;', 'Skips to the next iteration of the loop marked with :LoopLabel. The label is required.'],
+  Call: ['Call FunctionName(…);', 'Runs a function as a statement and discards its result. Required when the call is the whole statement.'],
+  Import: ['Import MacroName;', 'Makes the functions of another expression available in this macro.'],
+  Argument: ['Argument <Type> <Name>;', 'Declares an input parameter of the macro. Add IGNOREUNUSED if it may stay unused.'],
+  Vector: ['Vector <Type> <Name>;', 'A list of values. Vectors are 1-indexed: the first element is v[1], the last is v[Size(v)].'],
+  Object: ['Object <ObjectType> <Name>;', 'A pointer to one row of an OMP table, or NULL. Use Object Any for an untyped pointer.'],
+  Integer: ['Integer <Name>;', 'Whole number. Also used for true/false flags (1/0), because OPAL has no Boolean type.'],
+  Float: ['Float <Name>;', 'Decimal number (quantities, factors).'],
+  String: ['String <Name>;', 'Text. Concatenate with +. Literals use "double" or \'single\' quotes.'],
+  Date: ['Date <Name>;', 'Date and time value.'],
+  Enum: ['Enum <EnumName> <Name>;', 'A typed enumeration value, e.g. Enum Ask.'],
+  IGNOREUNUSED: ['Argument <Type> <Name> IGNOREUNUSED;', 'Marks an argument or variable that may stay unused, so it is not reported.'],
+  NULL: ['NULL', 'The empty object pointer. Test with == NULL or != NULL.'],
+  TRUE: ['TRUE', 'Integer 1.'], FALSE: ['FALSE', 'Integer 0.'],
+  GlobalBucketSeries: ['GlobalBucketSeries', 'Global bucket series of the planning view. FutureBuckets[1…], PastBuckets[1…NumberOfPastBuckets].'],
+  MESSAGE_NOTE: ['MESSAGE_NOTE', 'Severity for WriteMessage: note.'], MESSAGE_WARNING: ['MESSAGE_WARNING', 'Severity for WriteMessage: warning.'], MESSAGE_ERROR: ['MESSAGE_ERROR', 'Severity for WriteMessage: error.'],
+  ASK_OK: ['ASK_OK', 'Result of an Ask… dialog when the user pressed OK.'],
+};
+const KWDOC_L = new Map(Object.keys(KWDOC).map(k => [k.toLowerCase(), k]));
+
+const SNIPPETS = [
+  { key: 'if', label: 'If … Then … EndIf', text: 'If §condition§ Then\n\t$0\nEndIf;' },
+  { key: 'ife', label: 'If … Else … EndIf', text: 'If §condition§ Then\n\t\nElse\n\t\nEndIf;' },
+  { key: 'elif', label: 'If … ElIf … Else', text: 'If §condition§ Then\n\t\nElIf  Then\n\t\nElse\n\t\nEndIf;' },
+  { key: 'for', label: 'For i from 1 to Size(v)', text: 'For §I§ from 1 to Size()\n\t$0\nEndFor;' },
+  { key: 'forall', label: 'For obj in all("Type")', text: 'For §MyObject§ in all("Product")\n\t$0\nEndFor;' },
+  { key: 'while', label: 'While … EndWhile', text: 'While §condition§\n\t$0\nEndWhile;' },
+  { key: 'try', label: 'Try … Catch … EndCatch', text: 'Try\n\t$0\nCatch\n\tCall WriteMessage("Failed: " + GetExceptionMessage(), MESSAGE_ERROR);\nEndCatch;' },
+  { key: 'wm', label: 'Call WriteMessage', text: 'Call WriteMessage(§"text"§, MESSAGE_NOTE);' },
+  { key: 'header', label: '//! header block', text: null },
+  { key: 'locate', label: 'Locate + NULL check', text: 'If Locate§Product§(Id) != NULL Then\n\t$0\nEndIf;' },
+];
+
+// ---------- examples ----------
+const EX = [
+  { name: 'Find the bugs', file: 'sales_total.opal', code:
+`//!
+//!AUTHOR:      Demo
+//!DATE:        06-10-2026
+//!EXPLANATION: Sums the sales history of a product. Contains typical mistakes
+//!             for the checker to find - hover the underlined code.
+//!
+
+Argument Object Product MyProduct;
+
+Vector Float Sales;
+Float   Total;
+Integer I;
+Boolean IsBig;
+String  Unused;
+
+Sales = GetSalesHistory(MyProduct);
+For I = 1 to Size(Sales)
+   Total += Sales[I];
+EndFor;
+
+If Total = 0 Then
+   WriteMessage("No sales for " + MyProduct.ProductId);
+End If;
+
+If Totl > 1000 Then
+   Call WriteMessage("Big product", MESSAGE_NOTE)
+   Result = "Big";
+EndFor;
+
+Try
+   Call RecalculateTotals();
+Catch
+EndCatch;
+
+Label = If(Total > 0, "Sold", "None");
+Total
+` },
+  { name: 'Forecast vs. sales flag', file: 'calc_column_fcst_vs_sales.opal', code:
+`//!
+//!AUTHOR:      Demo
+//!DATE:        06-10-2026
+//!PROJECT:     PLS calculated column (Advanced tab)
+//!EXPLANATION: Flags forecast items whose next 3 months of forecast deviate
+//!             more than 30% from the last 3 months of sales.
+//!KEYWORDS:    calculated column, conflict, GetLineValues
+//!CHANGES:
+//!
+
+Float   SumOfSales;
+Float   SumOfForecast;
+Float   CONST_Threshold = 0.3;
+Integer N;
+String  Result = "No";
+
+N = GlobalBucketSeries.NumberOfPastBuckets;
+
+SumOfSales = Sum(GetLineValues("Sales History", ForecastItem,
+                 GlobalBucketSeries.PastBuckets[N - 2], GlobalBucketSeries.PastBuckets[N]));
+SumOfForecast = Sum(GetLineValues("Final Forecast", ForecastItem,
+                 GlobalBucketSeries.FutureBuckets[1], GlobalBucketSeries.FutureBuckets[3]));
+
+If SumOfSales == 0 Then
+   Result = "No history";
+ElIf Abs(SumOfSales - SumOfForecast) / SumOfSales > CONST_Threshold Then
+   Result = "Yes";
+EndIf;
+
+Result
+` },
+  { name: 'Clean up a table', file: 'cleanup_orphans.opal', code:
+`//!
+//!AUTHOR:      Demo
+//!DATE:        06-10-2026
+//!EXPLANATION: Deletes unit conversions that point to a product that no
+//!             longer exists, and reports how many were removed.
+//!KEYWORDS:    cleanup, DeleteObject, all
+//!CHANGES:
+//!
+
+Object  ProductUnitConversion MyConversion;
+Vector Object ProductUnitConversion ToDelete;
+Integer Removed = 0;
+
+For MyConversion in all("ProductUnitConversion")
+   If LocateProduct(MyConversion.ProductId) == NULL Then
+      ToDelete += [MyConversion];
+   EndIf;
+EndFor;
+
+// delete after the loop, so the loop never touches a deleted object
+For MyConversion in ToDelete
+   Call DeleteObject(MyConversion);
+   Removed += 1;
+EndFor;
+
+Call WriteMessage(CFormatter("Removed {0} orphan unit conversions.", Removed), MESSAGE_NOTE);
+1
+` },
+  { name: 'Join a vector (function)', file: 'Function_JoinStrings.opal', code:
+`//!
+//!AUTHOR:      Demo
+//!DATE:        06-10-2026
+//!EXPLANATION: Joins a vector of strings with a separator.
+//!             Usage: Result = Function_JoinStrings(["A","B"], " - ");
+//!
+
+Argument Vector String Parts;
+Argument String Separator;
+
+String  Result = "";
+Integer I = 1;
+
+While I <= Size(Parts)
+   Result += Parts[I];
+   If I < Size(Parts) Then
+      Result += Separator;
+   EndIf;
+   I += 1;
+EndWhile;
+
+Result
+` },
+  { name: 'Safe batch step', file: 'batch_step.opal', code:
+`//!
+//!AUTHOR:      Demo
+//!DATE:        06-10-2026
+//!EXPLANATION: Runs one batch step and always logs the outcome.
+//!
+
+Integer Ok = 0;
+
+Call WriteMessage("START - forecast refresh", MESSAGE_NOTE);
+Try
+   Call RunStatisticalEngine();
+   Ok = 1;
+Catch
+   Call WriteMessage("Forecast refresh failed: " + GetExceptionMessage(), MESSAGE_ERROR);
+EndCatch;
+Call WriteMessage("END - forecast refresh", MESSAGE_NOTE);
+
+Ok
+` },
+  { name: 'Empty macro', file: 'macro.opal', code: '' },
+];
+
+// ---------- measurement ----------
+let CW = 8.1, LH = 21;
+function measure() {
+  const s = document.createElement('span');
+  s.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font-family:var(--f-code);font-size:var(--code-size);';
+  s.textContent = 'M'.repeat(200);
+  codewrap.appendChild(s); CW = s.getBoundingClientRect().width / 200; s.remove();
+  LH = parseFloat(getComputedStyle(ta).lineHeight) || 21;
+}
+
+// ---------- rendering ----------
+let last = null;
+const esc = s => s.replace(/[&<>]/g, c => c === '&' ? '&amp;' : c === '<' ? '&lt;' : '&gt;');
+function lineStarts(src) { const a = [0]; for (let i = 0; i < src.length; i++) if (src[i] === '\n') a.push(i + 1); return a; }
+
+function classify(tokens, decls) {
+  const cls = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    let c = '';
+    switch (t.k) {
+      case 'kw': c = 'kw'; break;
+      case 'type': c = 'type'; break;
+      case 'str': c = 'str'; break;
+      case 'num': c = 'num'; break;
+      case 'cmt': c = 'cmt'; break;
+      case 'hdr': c = 'hdr'; break;
+      case 'dir': c = 'dir'; break;
+      case 'label': c = 'label'; break;
+      case 'id': {
+        let j = i + 1; while (tokens[j] && tokens[j].k === 'nl') j++;
+        const prev = tokens[i - 1];
+        if (tokens[i + 1] && tokens[i + 1].v === '(') c = 'fn';
+        else if (prev && prev.v === '.') c = 'mem';
+        else if (t.lv === 'end' && tokens[i + 1] && ['if','for','while'].includes(tokens[i + 1].lv)) c = 'kw';
+        else if (OPAL.CONSTS.has(t.lv) || /^[A-Z][A-Z0-9]*_[A-Z0-9_]+$/.test(t.v)) c = 'const';
+        break;
+      }
+    }
+    cls.push(c);
+  }
+  return cls;
+}
+
+function render(src, res) {
+  const starts = lineStarts(src);
+  const n = src.length;
+  const sevRank = { info: 1, warning: 2, error: 3 };
+  const under = new Uint8Array(n + 1);
+  for (const p of res.problems) {
+    const s = (starts[p.ln] || 0) + p.c; const e = Math.min(n, s + Math.max(1, p.len));
+    for (let k = s; k < e; k++) if (src[k] !== '\n' && under[k] < sevRank[p.sev]) under[k] = sevRank[p.sev];
+  }
+  const cls = classify(res.tokens);
+  let out = '', pos = 0;
+  const emit = (a, b, c) => {
+    // split by underline runs
+    let k = a;
+    while (k < b) {
+      const u = under[k]; let m = k + 1; while (m < b && under[m] === u) m++;
+      const uc = u === 3 ? 'u-error' : u === 2 ? 'u-warning' : u === 1 ? 'u-info' : '';
+      const cl = [c ? 't-' + c : '', uc].filter(Boolean).join(' ');
+      const txt = esc(src.slice(k, m));
+      out += cl ? `<span class="${cl}">${txt}</span>` : txt;
+      k = m;
+    }
+  };
+  res.tokens.forEach((t, i) => { if (t.s > pos) emit(pos, t.s, ''); emit(t.s, t.e, cls[i]); pos = t.e; });
+  if (pos < n) emit(pos, n, '');
+  hlcode.innerHTML = out + '\n\u00a0';
+  // gutter
+  const lineSev = [];
+  for (const p of res.problems) if (!lineSev[p.ln] || sevRank[p.sev] > sevRank[lineSev[p.ln]]) lineSev[p.ln] = p.sev;
+  let g = '';
+  for (let l = 0; l < starts.length; l++) g += `<div class="gl"${lineSev[l] ? ` data-sev="${lineSev[l]}"` : ''} data-l="${l}">${l + 1}</div>`;
+  gutter.innerHTML = g;
+  const digits = String(starts.length).length;
+  gutter.parentElement.style.width = Math.max(52, 30 + digits * 8) + 'px';
+  syncScroll(); markCurrentLine();
+}
+
+function syncScroll() {
+  hl.scrollTop = ta.scrollTop; hl.scrollLeft = ta.scrollLeft;
+  gutter.parentElement.scrollTop = ta.scrollTop;
+  markCurrentLine();
+}
+
+let curLn = -1;
+function caretLineCol(pos) {
+  const before = ta.value.slice(0, pos);
+  const ln = (before.match(/\n/g) || []).length;
+  const col = pos - (before.lastIndexOf('\n') + 1);
+  return { ln, col };
+}
+function markCurrentLine() {
+  const { ln, col } = caretLineCol(ta.selectionStart);
+  curline.style.top = (PAD_T + ln * LH) + 'px';
+  if (ln !== curLn) {
+    const old = gutter.querySelector('.gl.cur'); if (old) old.classList.remove('cur');
+    const g = gutter.children[ln]; if (g) g.classList.add('cur');
+    curLn = ln;
+  }
+  $('pos').textContent = `Ln ${ln + 1}, Col ${col + 1}`;
+}
+
+// ---------- check pipeline ----------
+let filter = { error: true, warning: true, info: true };
+function run() {
+  const src = ta.value;
+  const res = OPAL.check(src, catalog);
+  last = res;
+  render(src, res);
+  renderProblems();
+  store.set('opal-pg-draft', src);
+}
+let timer = 0;
+let raf = 0;
+function schedule() { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; run(); }); }
+
+function renderProblems() {
+  const P = last.problems;
+  const c = { error: 0, warning: 0, info: 0 };
+  P.forEach(p => c[p.sev]++);
+  const parts = [['error', 'err', 'Errors'], ['warning', 'warn', 'Warnings'], ['info', 'info', 'Hints']].filter(([k]) => c[k]);
+  $('pills').innerHTML = parts.length
+    ? parts.map(([k, cls, label]) => `<span class="pill ${cls}"><span class="dot"></span>${label} ${c[k]}</span>`).join('')
+    : '<span class="pill"><span class="dot"></span>No problems</span>';
+  $('probCount').textContent = c.error + c.warning + c.info;
+  $('filters').innerHTML = ['error', 'warning', 'info'].map(s => `<button class="chip ${s === 'warning' ? 'warn' : s === 'error' ? 'err' : 'info'}${c[s] ? '' : ' zero'}" data-f="${s}" aria-pressed="${filter[s]}" title="Show or hide ${s === 'info' ? 'hints' : s + 's'}"><i></i>${s === 'error' ? 'Errors' : s === 'warning' ? 'Warnings' : 'Hints'} ${c[s]}</button>`).join('');
+  const shown = P.filter(p => filter[p.sev]);
+  if (!P.length) {
+    $('probs').innerHTML = `<li class="empty"><strong>No problems found</strong>Blocks are balanced, comparisons use ==, every declared variable is used. Static checks cannot see your data model, so test it in OMP too.</li>`;
+    return;
+  }
+  $('probs').innerHTML = shown.map((p, i) => `<li class="prob" tabindex="0" data-sev="${p.sev}" data-i="${P.indexOf(p)}"><span class="sv"></span><span class="msg">${esc(p.msg)}<span class="code">${p.code}</span><span class="fb"><button class="fbbtn" data-fb="wrong" title="The checker is wrong here">Wrong</button><button class="fbbtn" data-fb="agree" aria-pressed="${agreed.has(p.code + '|' + p.msg) ? 'true' : 'false'}" title="This is correct and useful">Agree</button></span></span><span class="ln">Ln ${p.ln + 1}</span></li>`).join('') || `<li class="empty">All problems are hidden by the filters.</li>`;
+}
+$('filters').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; filter[b.dataset.f] = !filter[b.dataset.f]; renderProblems(); });
+function gotoProblem(p) {
+  const starts = lineStarts(ta.value);
+  const s = (starts[p.ln] || 0) + p.c;
+  ta.focus();
+  ta.setSelectionRange(s, s + Math.max(1, p.len));
+  const target = PAD_T + p.ln * LH - ta.clientHeight / 2;
+  ta.scrollTop = Math.max(0, target);
+  syncScroll();
+}
+$('probs').addEventListener('click', e => {
+  const li = e.target.closest('.prob'); if (!li) return;
+  const p = last.problems[+li.dataset.i];
+  const b = e.target.closest('[data-fb]');
+  if (b && b.dataset.fb === 'wrong') { feedbackProblem(p); return; }
+  if (b && b.dataset.fb === 'agree') { agree(p, b); return; }
+  gotoProblem(p);
+});
+$('probs').addEventListener('keydown', e => { if (e.key === 'Enter') { const li = e.target.closest('.prob'); if (li) gotoProblem(last.problems[+li.dataset.i]); } });
+
+// ---------- text editing helpers ----------
+function insertText(text, selectFrom, selectTo) {
+  ta.focus();
+  let ok = false;
+  try { ok = document.execCommand('insertText', false, text); } catch (e) { ok = false; }
+  if (!ok) { const s = ta.selectionStart; ta.setRangeText(text, s, ta.selectionEnd, 'end'); }
+  if (selectFrom != null) ta.setSelectionRange(selectFrom, selectTo != null ? selectTo : selectFrom);
+  schedule(); syncScroll();
+}
+function currentIndent(pos) {
+  const ls = ta.value.lastIndexOf('\n', pos - 1) + 1;
+  return /^[ \t]*/.exec(ta.value.slice(ls))[0];
+}
+function expandSnippet(text, indent) {
+  text = text.replace(/\t/g, '   ').replace(/\n/g, '\n' + indent);
+  let sel = null;
+  const m = /§([^§]*)§/.exec(text);
+  if (m) { sel = [m.index, m.index + m[1].length]; text = text.replace(/§([^§]*)§/, '$1'); }
+  const z = text.indexOf('$0');
+  if (z >= 0) { text = text.replace('$0', ''); if (!sel) sel = [z, z]; else if (z < sel[0]) { sel = [sel[0] - 2, sel[1] - 2]; } }
+  return { text, sel: sel || [text.length, text.length] };
+}
+function headerText() {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, '0') + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + d.getFullYear();
+  return `//!\n//!AUTHOR:      \n//!DATE:        ${dd}\n//!PROJECT:     \n//!EXPLANATION: \n//!KEYWORDS:    \n//!CHANGES:     \n//!\n\n`;
+}
+
+// ---------- autocomplete ----------
+let acItems = [], acIdx = 0, acOpen = false, acStart = 0;
+function wordBefore(pos) { const m = /[A-Za-z_$][\w$]*$/.exec(ta.value.slice(Math.max(0, pos - 80), pos)); return m ? m[0] : ''; }
+function tokenAt(pos) { if (!last) return null; for (const t of last.tokens) { if (t.k === 'nl') continue; if (pos > t.s && pos <= t.e) return t; if (t.s >= pos) break; } return null; }
+function suggestions(prefix) {
+  const p = prefix.toLowerCase();
+  const out = [];
+  // match the start of the name, or the start of a word inside it (GetSalesHistory: Get, Sales, History)
+  const score = (name, base) => {
+    const l = name.toLowerCase();
+    if (l === p) return base + 3;
+    if (l.startsWith(p)) return base + 2;
+    if (p.length >= 2) {
+      const starts = name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/_/g, ' ').toLowerCase().split(' ');
+      let off = 0;
+      for (const w of starts) { if (w && l.slice(off).startsWith(p) && off > 0) return base; off += w.length; }
+    }
+    return -1;
+  };
+  for (const s of SNIPPETS) { const sc = score(s.key, 40); if (sc >= 0 && p.length >= 2 || s.key === p) out.push({ kind: 'snip', label: s.key, detail: s.label, sn: s, sc: sc + 1 }); }
+  const seen = new Set();
+  if (last) for (const [k, d] of last.info.decls) { const sc = score(d.name, 60); if (sc >= 0 && d.name.toLowerCase() !== p) { out.push({ kind: 'var', label: d.name, detail: d.type, sc }); seen.add(k); } }
+  const kws = ['If','Then','ElIf','Else','EndIf','For','from','to','by','in','EndFor','While','EndWhile','Try','Catch','EndCatch','Rethrow','Return','Break','Continue','Call','Import','Argument','and','or','not','NULL','TRUE','FALSE','IGNOREUNUSED','MESSAGE_NOTE','MESSAGE_WARNING','MESSAGE_ERROR','ASK_OK','GlobalBucketSeries'];
+  for (const k of kws) { const sc = score(k, 30); if (sc >= 0 && k.toLowerCase() !== p) out.push({ kind: 'kw', label: k, detail: 'keyword', sc }); }
+  for (const k of ['Integer','Float','String','Date','Object','Vector','Enum','HMS','Color','Duration']) { const sc = score(k, 35); if (sc >= 0 && k.toLowerCase() !== p) out.push({ kind: 'type', label: k, detail: 'type', sc }); }
+  for (const f of FN.values()) { const sc = score(f.name, 20); if (sc >= 0 && !seen.has(f.name.toLowerCase())) out.push({ kind: 'fn', label: f.name, detail: f.ret || '', f, sc: sc + Math.min(9, Math.log10(1 + f.uses) * 2) }); }
+  out.sort((a, b) => b.sc - a.sc || a.label.localeCompare(b.label));
+  return out.slice(0, 40);
+}
+function openAC(force) {
+  const pos = ta.selectionStart;
+  if (ta.selectionEnd !== pos) return closeAC();
+  const t = tokenAt(pos);
+  if (t && (t.k === 'cmt' || t.k === 'hdr')) return closeAC();
+  if (t && t.k === 'str' && !(pos === t.e && t.v.length > 1 && t.v[t.v.length - 1] === t.v[0])) return closeAC();
+  const w = wordBefore(pos);
+  if (!w && !force) return closeAC();
+  if (ta.value[pos - w.length - 1] === '.') return closeAC();
+  acItems = suggestions(w);
+  if (!acItems.length || (!force && w.length < 1)) return closeAC();
+  acStart = pos - w.length; acIdx = 0; acOpen = true;
+  drawAC(w);
+  const { ln, col } = caretLineCol(acStart);
+  let x = PAD_L + col * CW - ta.scrollLeft - 40;
+  let y = PAD_T + (ln + 1) * LH - ta.scrollTop + 4;
+  ac.hidden = false;
+  const W = codewrap.clientWidth, H = codewrap.clientHeight;
+  x = Math.max(8, Math.min(x, W - ac.offsetWidth - 8));
+  if (y + ac.offsetHeight > H - 4 && y - LH - ac.offsetHeight - 8 > 0) y = y - LH - ac.offsetHeight - 8;
+  ac.style.left = x + 'px'; ac.style.top = y + 'px';
+}
+function drawAC(w) {
+  const hi = s => { const i = s.toLowerCase().indexOf(w.toLowerCase()); return i < 0 || !w ? esc(s) : esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + w.length)) + '</mark>' + esc(s.slice(i + w.length)); };
+  const cur = acItems[acIdx];
+  let foot = '';
+  if (cur && cur.kind === 'fn' && (cur.f.sig || cur.f.desc)) { const ss = cur.f.sigs || [cur.f.sig]; foot = `<div class="ac-foot">${ss[0] ? `<code>${esc(ss[0])}</code>${ss.length > 1 ? ` <span class="more-ov">+${ss.length - 1} more</span>` : ''}${cur.f.ret ? ` <span class="more-ov">→ ${esc(cur.f.ret)}</span>` : ''}<br>` : ''}${esc(cur.f.desc || '')}</div>`; }
+  else if (cur && cur.kind === 'snip') foot = `<div class="ac-foot">Inserts a <b>${esc(cur.sn.label)}</b> template.</div>`;
+  else if (cur && KWDOC_L.has(cur.label.toLowerCase())) { const d = KWDOC[KWDOC_L.get(cur.label.toLowerCase())]; foot = `<div class="ac-foot"><code>${esc(d[0])}</code><br>${esc(d[1])}</div>`; }
+  ac.innerHTML = acItems.map((it, i) => `<div class="ac-item${i === acIdx ? ' on' : ''}" role="option" aria-selected="${i === acIdx}" data-i="${i}"><span class="ac-kind ${it.kind}">${it.kind === 'snip' ? 'snip' : it.kind}</span><span class="ac-label">${hi(it.label)}</span><span class="ac-detail">${esc(it.detail || '')}</span></div>`).join('') + foot;
+  const on = ac.querySelector('.ac-item.on'); if (on) on.scrollIntoView({ block: 'nearest' });
+}
+function closeAC() { acOpen = false; ac.hidden = true; }
+function acceptAC(i) {
+  const it = acItems[i]; if (!it) return;
+  const pos = ta.selectionStart;
+  ta.setSelectionRange(acStart, pos);
+  if (it.kind === 'snip') {
+    const indent = currentIndent(acStart);
+    const raw = it.sn.text === null ? headerText() : it.sn.text;
+    const { text, sel } = expandSnippet(raw, indent);
+    closeAC();
+    insertText(text, acStart + sel[0], acStart + sel[1]);
+  } else if (it.kind === 'fn') {
+    const hasParen = ta.value[pos] === '(';
+    closeAC();
+    insertText(it.label + (hasParen ? '' : '()'), acStart + it.label.length + 1);
+    if (hasParen) ta.setSelectionRange(acStart + it.label.length, acStart + it.label.length);
+  } else {
+    closeAC();
+    insertText(it.label);
+    if (it.kind === 'kw') fixCloserIndent();
+  }
+  updateSig();
+}
+ac.addEventListener('mousedown', e => { const el = e.target.closest('.ac-item'); if (el) { e.preventDefault(); acceptAC(+el.dataset.i); } });
+
+// ---------- signature help ----------
+const SIG_HINT = '<i>Put the cursor on a function or inside its ( ) to see its signature here · Ctrl+Space for suggestions</i>';
+function updateSig() {
+  const pos = ta.selectionStart;
+  const src = ta.value.slice(Math.max(0, pos - 2000), pos);
+  let d = 0, k = src.length - 1, inStr = null;
+  for (; k >= 0; k--) {
+    const ch = src[k];
+    if (ch === '\n' && d === 0 && false) break;
+    if (ch === ')') d++;
+    else if (ch === '(') { if (d === 0) break; d--; }
+    else if (ch === ';') { k = -1; break; }
+  }
+  const sigEl = $('sig');
+  // cursor on a function name itself?
+  const after = /^[\w$]*\s*\(/.exec(ta.value.slice(pos, pos + 80));
+  const onName = /[A-Za-z_$][\w$]*$/.exec(src);
+  if (after && onName) { k = src.length; }
+  if (k >= 0) {
+    const m = /([A-Za-z_$][\w$]*)\s*$/.exec(src.slice(0, k) + (after && onName ? after[0].replace(/\s*\($/, '') : ''));
+    const f = m && FN.get(m[1].toLowerCase());
+    if (f) {
+      // which argument is the cursor in?
+      let argi = 0, dd = 0;
+      if (!(after && onName)) for (let q = k + 1; q < src.length; q++) { const c = src[q]; if ('([{'.includes(c)) dd++; else if (')]}'.includes(c)) dd--; else if (c === ',' && dd === 0) argi++; }
+      if (f.o && f.o.length) {
+        const ov = f.o.find(ps => ps.length > argi) || f.o[f.o.length - 1];
+        const parts = ov.map((p, i) => { const t = (p[2] ? '[' : '') + (p[0] && p[0] !== 'Any' ? p[0] + ' ' : '') + p[1] + (p[2] ? ']' : ''); return i === argi && !(after && onName) ? `<u>${esc(t)}</u>` : esc(t); });
+        sigEl.innerHTML = `<b>${esc(f.name)}</b>(${parts.join(', ')})${f.o.length > 1 ? ` <i>· ${f.o.length} variants</i>` : ''}${f.ret ? ` <i>→ ${esc(f.ret)}</i>` : ''}`;
+      } else {
+        const sg = f.sig ? esc(f.sig).replace(new RegExp('\\b' + f.name + '\\b', 'gi'), m => `<b>${m}</b>`) : `<b>${esc(f.name)}</b> <i>— signature not documented</i>`;
+        sigEl.innerHTML = sg + (f.ret ? ` <i>→ ${esc(f.ret)}</i>` : '');
+      }
+      return;
+    }
+  }
+  sigEl.innerHTML = SIG_HINT;
+}
+
+// ---------- hover tooltip ----------
+function posFromPoint(e) {
+  const r = ta.getBoundingClientRect();
+  const x = e.clientX - r.left + ta.scrollLeft - PAD_L, y = e.clientY - r.top + ta.scrollTop - PAD_T;
+  const ln = Math.floor(y / LH); const col = Math.floor(x / CW);
+  if (ln < 0 || col < 0) return null;
+  const starts = lineStarts(ta.value);
+  if (ln >= starts.length) return null;
+  const lineEnd = ln + 1 < starts.length ? starts[ln + 1] - 1 : ta.value.length;
+  if (starts[ln] + col >= lineEnd) return null;
+  return { pos: starts[ln] + col, ln, col };
+}
+let tipTimer = 0;
+function showTip(e) {
+  if (acOpen) return;
+  const p = posFromPoint(e);
+  if (!p || !last) { tip.hidden = true; return; }
+  let html = '';
+  const probs = last.problems.filter(q => q.ln === p.ln && p.col >= q.c && p.col < q.c + Math.max(1, q.len));
+  for (const q of probs) html += `<div class="tprob"><span class="sv" style="width:8px;height:8px;border-radius:50%;flex:none;background:var(--${q.sev === 'error' ? 'err' : q.sev === 'warning' ? 'warn' : 'info'})"></span><span>${esc(q.msg)}</span></div>`;
+  let tok = null;
+  for (const t of last.tokens) { if (t.s <= p.pos && p.pos < t.e) { tok = t; break; } if (t.s > p.pos) break; }
+  let doc = '';
+  if (tok && (tok.k === 'id' || tok.k === 'kw' || tok.k === 'type')) {
+    const i = last.tokens.indexOf(tok);
+    const prev = last.tokens[i - 1];
+    const isCall = last.tokens[i + 1] && last.tokens[i + 1].v === '(';
+    const f = FN.get(tok.lv);
+    const d = last.info.decls.get(tok.lv);
+    const kd = KWDOC_L.get(tok.lv);
+    if (prev && prev.v === '.') doc = `<div class="tsig">.${esc(tok.v)}</div><div class="tret">Attribute or method of an object</div>`;
+    else if (d && !isCall) doc = `<div class="tsig">${d.isArg ? 'Argument ' : ''}${esc(d.type)} ${esc(d.name)}</div><div class="tret">Declared on line ${d.ln + 1}</div>`;
+    else if (f && f.nameOnly && isCall) doc = `<div class="tsig">${esc(f.name)}(…)</div><div class="tdesc">OMP built-in (${esc(f.cat)}). No description here yet.</div>`;
+    else if (f && (isCall || tok.k === 'id')) doc = `<div class="tsig">${(f.sigs || [f.sig || f.name + '(…)']).map(esc).join('<br>')}</div>${f.ret ? `<div class="tret">Returns ${esc(f.ret)}${f.unverified ? ' · <span class="unv">unverified</span>' : ''}</div>` : ''}<div class="tdesc">${esc(f.desc || '')}</div>${f.ex ? `<div class="tex">${esc(f.ex)}</div>` : ''}`;
+    else if (kd) doc = `<div class="tsig">${esc(KWDOC[kd][0])}</div><div class="tdesc">${esc(KWDOC[kd][1])}</div>`;
+    else if (/^locate/i.test(tok.v) && isCall) doc = `<div class="tsig">${esc(tok.v)}(Id)</div><div class="tret">Returns Object ${esc(tok.v.slice(6))} or NULL</div><div class="tdesc">Finds a ${esc(tok.v.slice(6))} by its key. Always test the result with != NULL.</div>`;
+  }
+  if (html && doc) html += '<hr>';
+  html += doc;
+  if (!html) { tip.hidden = true; return; }
+  tip.innerHTML = html; tip.hidden = false;
+  const r = codewrap.getBoundingClientRect();
+  let x = e.clientX - r.left + 12, y = e.clientY - r.top + 18;
+  x = Math.max(8, Math.min(x, codewrap.clientWidth - tip.offsetWidth - 8));
+  if (y + tip.offsetHeight > codewrap.clientHeight - 8) y = e.clientY - r.top - tip.offsetHeight - 12;
+  tip.style.left = x + 'px'; tip.style.top = Math.max(4, y) + 'px';
+}
+ta.addEventListener('mousemove', e => { clearTimeout(tipTimer); tip.hidden = true; tipTimer = setTimeout(() => showTip(e), 260); });
+ta.addEventListener('mouseleave', () => { clearTimeout(tipTimer); tip.hidden = true; });
+
+// re-indent the current line when it is a block closer (EndIf; Else, …)
+function fixCloserIndent() {
+  const s = ta.selectionStart, v = ta.value, ls = v.lastIndexOf('\n', s - 1) + 1;
+  let le = v.indexOf('\n', s); if (le < 0) le = v.length;
+  const line = v.slice(ls, le);
+  if (!/^\s*(EndIf|EndFor|EndWhile|EndCatch|Else|ElIf|Catch)\b/i.test(line)) return;
+  const { ln } = caretLineCol(s);
+  const want = (OPAL.format(v).split('\n')[ln] || '').match(/^ */)[0];
+  const have = line.match(/^[ \t]*/)[0];
+  if (want === have) return;
+  const off = s - ls - have.length;
+  ta.setSelectionRange(ls, ls + have.length);
+  insertText(want, ls + want.length + off);
+}
+
+// ---------- keyboard ----------
+const OPEN_LINE = /^\s*(If\b.*\bThen|ElIf\b.*\bThen|Else|Try|Catch|For\b.*|While\b.*)\s*(\/\/.*)?$/i;
+ta.addEventListener('keydown', e => {
+  tip.hidden = true;
+  if (acOpen) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); acIdx = (acIdx + 1) % acItems.length; drawAC(wordBefore(ta.selectionStart)); return; }
+    if (e.key === 'ArrowUp') { e.preventDefault(); acIdx = (acIdx - 1 + acItems.length) % acItems.length; drawAC(wordBefore(ta.selectionStart)); return; }
+    if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); acceptAC(acIdx); return; }
+    if (e.key === 'Escape') { e.preventDefault(); closeAC(); return; }
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === ' ') { e.preventDefault(); openAC(true); return; }
+  if (e.shiftKey && e.altKey && (e.key === 'F' || e.key === 'f')) { e.preventDefault(); doFormat(); return; }
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const s = ta.selectionStart, en = ta.selectionEnd, v = ta.value;
+    if (s === en && !e.shiftKey) { insertText('   '); return; }
+    const ls = v.lastIndexOf('\n', s - 1) + 1;
+    const block = v.slice(ls, en);
+    const lines = block.split('\n');
+    const changed = lines.map(l => e.shiftKey ? l.replace(/^( {1,3}|\t)/, '') : '   ' + l).join('\n');
+    ta.setSelectionRange(ls, en); insertText(changed, ls, ls + changed.length);
+    return;
+  }
+  if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) {
+    e.preventDefault();
+    const s = ta.selectionStart; const v = ta.value;
+    const ls = v.lastIndexOf('\n', s - 1) + 1;
+    const line = v.slice(ls, s);
+    let ind = /^[ \t]*/.exec(line)[0];
+    if (OPEN_LINE.test(line) && !/;\s*$/.test(line)) ind += '   ';
+    insertText('\n' + ind);
+    return;
+  }
+});
+ta.addEventListener('input', e => {
+  schedule();
+  if (e.inputType === 'insertText' && /[\w$]/.test(e.data || '')) openAC(false);
+  else if (e.inputType === 'deleteContentBackward' && acOpen) openAC(false);
+  else closeAC();
+  if (e.inputType === 'insertText' && e.data === ';') fixCloserIndent();
+  updateSig();
+});
+ta.addEventListener('scroll', () => { syncScroll(); if (acOpen) closeAC(); tip.hidden = true; });
+ta.addEventListener('click', () => { closeAC(); markCurrentLine(); updateSig(); });
+ta.addEventListener('keyup', e => { if (!['ArrowDown','ArrowUp'].includes(e.key) || !acOpen) { markCurrentLine(); updateSig(); } });
+ta.addEventListener('blur', () => setTimeout(closeAC, 120));
+document.addEventListener('selectionchange', () => { if (document.activeElement === ta) markCurrentLine(); });
+
+// ---------- toolbar ----------
+function doFormat() {
+  const pos = ta.selectionStart;
+  const { ln } = caretLineCol(pos);
+  const f = OPAL.format(ta.value);
+  if (f === ta.value) { toast('Already formatted'); return; }
+  ta.setSelectionRange(0, ta.value.length);
+  insertText(f);
+  const starts = lineStarts(ta.value);
+  const p = starts[Math.min(ln, starts.length - 1)] || 0;
+  ta.setSelectionRange(p, p);
+  toast('Formatted');
+}
+$('btnFormat').addEventListener('click', doFormat);
+$('btnHeader').addEventListener('click', () => {
+  if (/^\s*\/\/!/.test(ta.value)) { toast('This macro already has a header'); return; }
+  let h = headerText();
+  if (/^\s*\n/.test(ta.value)) h = h.replace(/\n$/, ''); // code already starts with a blank line
+  ta.setSelectionRange(0, 0); insertText(h, h.length, h.length); ta.scrollTop = 0; syncScroll();
+});
+$('btnCopy').addEventListener('click', () => {
+  const done = () => toast('Copied to clipboard');
+  const fallback = () => { ta.focus(); ta.select(); toast('Selected — press Ctrl+C to copy'); };
+  try { navigator.clipboard.writeText(ta.value).then(done, fallback); } catch (e) { fallback(); }
+});
+const sel = $('examples');
+sel.innerHTML = '<option value="" disabled>Examples…</option>' + EX.map((x, i) => `<option value="${i}">${esc(x.name)}</option>`).join('');
+sel.addEventListener('change', () => { loadExample(+sel.value); });
+function loadExample(i) {
+  const x = EX[i]; sel.value = String(i);
+  $('fname').textContent = x.file;
+  ta.value = x.code; ta.setSelectionRange(0, 0); ta.scrollTop = 0; ta.scrollLeft = 0;
+  store.set('opal-pg-file', x.file);
+  closeAC(); run(); ta.focus();
+}
+let toastT = 0;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 1600); }
+
+// ---------- tabs ----------
+const tabs = ['problems', 'ref', 'rules', 'about'];
+function selectTab(name) {
+  for (const t of tabs) { $('tab-' + t).setAttribute('aria-selected', String(t === name)); $('pane-' + t).hidden = t !== name; }
+  if (name === 'ref' && !$('refList').dataset.ready) drawRef('');
+  store.set('opal-pg-tab', name);
+}
+tabs.forEach(t => $('tab-' + t).addEventListener('click', () => selectTab(t)));
+
+// ---------- reference ----------
+let refLimit = 60;
+function drawRef(q) {
+  $('refList').dataset.ready = '1';
+  const p = q.trim().toLowerCase();
+  const kw = Object.keys(KWDOC).filter(k => !p || k.toLowerCase().includes(p) || KWDOC[k][1].toLowerCase().includes(p));
+  const fns = [...FN.values()].filter(f => p === 'unverified' ? f.unverified : (!p || f.name.toLowerCase().includes(p) || (f.desc || '').toLowerCase().includes(p) || (f.cat || '').toLowerCase().includes(p)))
+    .sort((a, b) => (p ? (b.name.toLowerCase().startsWith(p) - a.name.toLowerCase().startsWith(p)) : 0) || ({ ref: 2, note: 1, seen: 1, index: 0 }[b.src] || 0) - ({ ref: 2, note: 1, seen: 1, index: 0 }[a.src] || 0) || b.uses - a.uses || a.name.localeCompare(b.name));
+  let h = '';
+  if (kw.length) h += `<div class="refgroup">Language</div>` + kw.slice(0, p ? 50 : 12).map(k => `<div class="ref" data-kw="${k}"><div class="ref-top"><span class="ref-name kw">${esc(k)}</span></div><div class="ref-sig">${esc(KWDOC[k][0])}</div><div class="ref-desc">${esc(KWDOC[k][1])}</div></div>`).join('');
+  h += `<div class="refgroup">Functions · ${fns.length}</div>` + fns.slice(0, refLimit).map(f => `<div class="ref" data-fn="${esc(f.name)}" title="Click to insert"><div class="ref-top"><span class="ref-name">${esc(f.name)}</span>${f.unverified ? '<span class="unv" title="Signature or behaviour not confirmed yet. Corrections welcome.">unverified</span>' : ''}${f.ret ? `<span class="ref-ret">${esc(f.ret)}</span>` : ''}</div>${f.sig ? `<div class="ref-sig">${(f.sigs || [f.sig]).map(x => `<div>${esc(x)}</div>`).join('')}</div>` : ''}${f.cat ? `<div class="ref-cat">${esc(f.cat)}</div>` : ''}<div class="ref-desc">${f.nameOnly ? '<i>Built-in function. No description here yet; suggestions welcome.</i>' : esc(f.desc || '')}</div>${f.ex ? `<div class="ref-ex">${esc(f.ex)}</div>` : ''}<button class="linkbtn" data-sug="${esc(f.name)}">Suggest a correction</button></div>`).join('');
+  if (fns.length > refLimit) h += `<button class="btn more" id="refMore">Show ${Math.min(100, fns.length - refLimit)} more</button>`;
+  $('refList').innerHTML = h;
+}
+$('refSearch').addEventListener('input', e => { refLimit = 60; drawRef(e.target.value); });
+$('refList').addEventListener('click', e => {
+  if (e.target.id === 'refMore') { refLimit += 100; drawRef($('refSearch').value); return; }
+  const sg = e.target.closest('[data-sug]');
+  if (sg) { feedbackFunction(sg.dataset.sug); return; }
+  const r = e.target.closest('.ref'); if (!r) return;
+  if (r.dataset.fn) { const n = r.dataset.fn; const s = ta.selectionStart; ta.focus(); ta.setSelectionRange(s, ta.selectionEnd); insertText(n + '()', s + n.length + 1); updateSig(); }
+});
+
+// ---------- rules ----------
+const RULES = [
+  ['error', 'E-BLOCK', 'If / For / While / Try blocks must be closed by the matching EndIf / EndFor / EndWhile / EndCatch, in the right order. Else and ElIf only inside an If.'],
+  ['error', 'E-ENDWORD', '"End If" written as two words. OPAL uses EndIf, EndFor, EndWhile, EndCatch.'],
+  ['error', 'E-THEN', 'If and ElIf need "Then" after the condition.'],
+  ['error', 'E-EQ', 'Single "=" inside an If or While condition. Comparisons use "==".'],
+  ['error', 'E-FOR', '"For i = 1 to N" is not OPAL. Use "For i from 1 to N" or "For x in vector".'],
+  ['error', 'E-BOOL', 'There is no Boolean type. Use Integer 1/0 or TRUE/FALSE.'],
+  ['error', 'E-TERNARY', 'If(cond, a, b) does not exist. Use an inline If … Then … Else or an If block.'],
+  ['error', 'E-ARGS', 'A built-in function called with too few or too many arguments (based on how the function is called in practice).'],
+  ['error', 'E-RETURN', 'The macro must end with a value (a bare expression such as Result or 1, without ";"). OMP reports "Not all code paths return a value". Shown as a warning when the macro uses Return statements, because then every branch may already return.'],
+  ['error', 'E-DUP', 'The same name is declared twice, even with a different type (OMP: Identifier already exists). Declarations in the #If and #Else branches of one directive are allowed; in two separate #If blocks it is a warning.'],
+  ['error', 'E-SEMI', 'A statement is missing its closing ";" before the next statement starts.'],
+  ['error', 'E-PAREN', 'Brackets and parentheses must match.'],
+  ['error', 'E-STRING', 'Strings must be closed on the same line.'],
+  ['error', 'E-CALL', 'A statement that only runs a function needs "Call" in front (Call WriteMessage("x");). Confirmed in OMP: without Call it is a syntax error.'],
+  ['error', 'E-CALL-NAME', 'Call must be followed by a function name and parentheses.'],
+  ['error', 'E-EMPTY', 'A ";" that ends nothing: after Then, Else, Try or Catch, after a For header or While condition, or several semicolons in a row. OMP rejects it ("statement expected").'],
+  ['error', 'E-EXPR', 'Malformed expression: two values with no operator between them ("a" "b", 1 2), empty ( ) that do not follow a function name, or { } used for anything other than {Identifier}.'],
+  ['error', 'E-BREAK', 'Break and Continue only inside a loop, and always with the loop label (For … :MyLoop … Break MyLoop;). Rethrow only inside Catch.'],
+  ['error', 'E-DECL', 'Malformed declaration: type, (class), name, optional "= value", then ";".'],
+  ['error', 'E-DIR', 'Compiler directives #If … #EndIf must be balanced.'],
+
+  ['warning', 'W-TYPO', 'An undeclared name that is one letter away from a declared variable.'],
+  ['warning', 'W-UNUSED', 'Variable declared but never used. Arguments and IGNOREUNUSED are skipped.'],
+  ['warning', 'W-EMPTYCATCH', 'An empty Catch swallows every error silently.'],
+  ['warning', 'W-UNREACH', 'Code after Return in the same block never runs.'],
+  ['warning', 'W-INDEX0', 'Looping a vector from 0: vectors are 1-indexed.'],
+  ['warning', 'W-ELSEIF', '"Else If" opens a nested If that needs its own EndIf. ElIf is usually meant.'],
+  ['info', 'I-NESTED', 'A loop over all() inside another loop over all(): cost grows with rows × rows.'],
+  ['info', 'I-SIZE', '"< Size(v)" in a While condition skips the last element of a 1-indexed vector.'],
+  ['info', 'I-ASK', 'Ask… dialogs can be cancelled; check GetAskResult() == ASK_OK.'],
+  ['info', 'I-DEPRECATED', 'A function that OMP marks as deprecated, with the recommended alternative.'],
+  ['info', 'I-INVISIBLE', 'A function that does not work in invisible (batch) mode, called without an #If !IsOption("INVISIBLE") guard.'],
+  ['info', 'I-BUCKET', 'GetBucketSeries() where the global GlobalBucketSeries is available.'],
+  ['info', 'I-UNDECL', 'Assignment to, or loop over, a variable that is not declared. OMP accepts this (it creates the variable), but a declaration fixes the type and catches typos.'],
+  ['info', 'I-UNKNOWN', 'A name that is declared nowhere in the macro. Fine for context objects (ForecastItem, the object of a calculated attribute) and global variables; anything else OPAL cannot resolve.'],
+  ['info', 'I-UNKNOWNFN', 'A function that is not a known built-in and not imported.'],
+  ['info', 'I-INLINEIF', 'Inline If … Then … Else without EndIf: fine in single-expression contexts only.'],
+  ['info', 'I-HEADER', 'No //! header block with author, date, explanation and changes.'],
+];
+$('rules').innerHTML = `<div class="rules-top"><b>How the checker works</b><button class="btn" id="btnRule">Suggest a new rule</button></div><p>The checker reads your code without running it. Each rule has a severity, shown by colour in the editor margin, in the underline and in the Problems list:</p>
+<div class="legend">
+  <div><span class="lg err"></span><b>Error</b> · red · OPAL will not compile this. Fix it first.</div>
+  <div><span class="lg warn"></span><b>Warning</b> · amber · compiles, but is very likely a bug.</div>
+  <div><span class="lg info"></span><b>Hint</b> · blue, dotted underline · style, safety or performance advice.</div>
+</div>` +
+  RULES.map(([s, c, d]) => `<div class="rule"><span class="rc ${s}">${c}<span class="rs">${s === 'info' ? 'Hint' : s === 'error' ? 'Error' : 'Warning'}</span></span><span>${esc(d)}<button class="linkbtn" data-rule="${c}">Comment on this rule</button></span></div>`).join('');
+$('rules').addEventListener('click', e => {
+  if (e.target.id === 'btnRule') { feedbackNewRule(); return; }
+  const r = e.target.closest('[data-rule]'); if (r) feedbackRule(r.dataset.rule);
+});
+
+// ---------- feedback ----------
+// Set this to your Formspree form URL (e.g. https://formspree.io/f/xxxxxxx) once the account exists.
+const FEEDBACK_ENDPOINT = 'https://formspree.io/f/xzedeeqa';
+const APP_VERSION = 'v0.12';
+const agreed = new Set();
+let fbCtx = null;
+
+function codeLines(from, to) {
+  const lines = ta.value.split('\n');
+  from = Math.max(0, from); to = Math.min(lines.length - 1, to);
+  const w = String(to + 1).length;
+  return lines.slice(from, to + 1).map((l, k) => String(from + k + 1).padStart(w, ' ') + '  ' + l).join('\n');
+}
+function openFeedback(o) {
+  fbCtx = o;
+  $('fbTitle').textContent = o.title;
+  $('fbCtx').innerHTML = o.context;
+  $('fbKindWrap').hidden = !o.kinds;
+  if (o.kinds) $('fbKind').innerHTML = o.kinds.map(k => `<option>${esc(k)}</option>`).join('');
+  $('fbCommentLabel').textContent = o.commentLabel || 'Comment';
+  $('fbComment').placeholder = o.placeholder || '';
+  $('fbComment').value = '';
+  $('fbAttachWrap').hidden = !o.code;
+  $('fbAttach').checked = false;
+  $('fbAttachLabel').textContent = o.codeLabel || 'Attach these code lines';
+  $('fbCode').textContent = o.code || '';
+  $('fbCode').hidden = true;
+  $('fbEmail').value = store.get('opal-pg-email') || '';
+  $('fbNote').hidden = true;
+  $('fbSend').textContent = 'Send feedback'; $('fbSend').disabled = false;
+  $('fbModal').hidden = false;
+  setTimeout(() => (o.kinds ? $('fbKind') : $('fbComment')).focus(), 30);
+}
+function closeFeedback() { $('fbModal').hidden = true; fbCtx = null; }
+$('fbAttach').addEventListener('change', e => { $('fbCode').hidden = !e.target.checked; });
+$('fbCancel').addEventListener('click', closeFeedback);
+$('fbModal').addEventListener('mousedown', e => { if (e.target.id === 'fbModal') closeFeedback(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('fbModal').hidden) closeFeedback(); });
+
+async function sendFeedback(payload) {
+  payload.version = APP_VERSION;
+  payload.sentAt = new Date().toISOString();
+  payload._subject = 'OPAL Playground ' + APP_VERSION + ': ' + (payload.type || 'feedback') + (payload.rule ? ' ' + payload.rule : '') + (payload.function ? ' ' + payload.function : '');
+  if (!FEEDBACK_ENDPOINT) return { ok: false, offline: true, payload };
+  try {
+    const r = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+    return { ok: r.ok, payload };
+  } catch (e) { return { ok: false, payload }; }
+}
+$('fbForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!fbCtx) return;
+  if ($('fbSend').dataset.mode === 'close') { $('fbSend').dataset.mode = ''; closeFeedback(); return; }
+  const comment = $('fbComment').value.trim();
+  if (fbCtx.needComment && !comment) { $('fbNote').hidden = false; $('fbNote').textContent = 'Please describe the problem in a few words.'; $('fbComment').focus(); return; }
+  const email = $('fbEmail').value.trim();
+  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('fbNote').hidden = false; $('fbNote').textContent = 'That email address does not look complete. Fix it or leave the field empty.'; return; }
+  store.set('opal-pg-email', email);
+  const payload = Object.assign({}, fbCtx.data, { kind: fbCtx.kinds ? $('fbKind').value : undefined, comment, email: email || undefined, code: $('fbAttach').checked ? fbCtx.code : undefined });
+  $('fbSend').disabled = true; $('fbSend').textContent = 'Sending…';
+  const res = await sendFeedback(payload);
+  $('fbSend').disabled = false;
+  if (res.ok) { closeFeedback(); toast('Thanks, your feedback was sent'); return; }
+  $('fbNote').hidden = false;
+  if (res.offline) {
+    $('fbNote').innerHTML = '<b>Feedback is not connected yet.</b> On the public site this would be sent:<pre>' + esc(JSON.stringify(res.payload, null, 2)) + '</pre>';
+    $('fbSend').textContent = 'Close'; $('fbSend').dataset.mode = 'close';
+  } else {
+    $('fbNote').innerHTML = 'Could not send the feedback. Check your connection and try again. If it keeps failing (some sites and company networks block it), copy the text below and send it by email instead.<pre>' + esc(JSON.stringify(Object.assign({}, res.payload, { _subject: undefined }), null, 2)) + '</pre>';
+    $('fbSend').textContent = 'Try again';
+  }
+});
+
+function feedbackProblem(p) {
+  openFeedback({
+    title: 'This check looks wrong',
+    context: `<b>${esc(p.code)}</b> on line ${p.ln + 1}<br>${esc(p.msg)}`,
+    kinds: ['False alarm: this code is fine in OMP', 'Wrong severity (should be error / warning / hint)', 'Message is unclear or inaccurate', 'Other'],
+    commentLabel: 'What is wrong? (optional)',
+    placeholder: 'e.g. OMP accepts this, I use it in production.',
+    code: codeLines(p.ln - 2, p.ln + 2), codeLabel: 'Attach the 5 lines around this problem',
+    data: { type: 'problem-wrong', rule: p.code, message: p.msg },
+  });
+}
+function agree(p, b) {
+  const key = p.code + '|' + p.msg;
+  if (agreed.has(key)) return;
+  agreed.add(key); b.setAttribute('aria-pressed', 'true');
+  sendFeedback({ type: 'problem-agree', rule: p.code, message: p.msg });
+  toast('Thanks, noted');
+}
+function feedbackMissed() {
+  const s = ta.selectionStart, en = ta.selectionEnd;
+  let code, label;
+  if (en > s) { const a = caretLineCol(s).ln, b = caretLineCol(en).ln; code = codeLines(a, b); label = `Attach the selected lines (${a + 1}–${b + 1})`; }
+  else { const n = ta.value.split('\n').length; code = codeLines(0, Math.min(n, 200) - 1); label = n > 200 ? 'Attach the first 200 lines of the macro' : 'Attach the whole macro'; }
+  openFeedback({
+    title: 'Report a missed error',
+    context: 'OMP rejected code (or failed at run time) but the checker did not warn you. Tip: select the relevant lines first, so only those are attached.',
+    commentLabel: 'What did OMP say?',
+    placeholder: 'Paste the OMP error message and what you expected the checker to catch.',
+    needComment: true,
+    code, codeLabel: label,
+    data: { type: 'missed-error' },
+  });
+}
+function feedbackFunction(name) {
+  const f = FN.get(name.toLowerCase()) || { name };
+  openFeedback({
+    title: `Suggest a correction for ${name}`,
+    context: `<code>${esc(f.sig || name + '(…)')}</code>${f.ret ? ` → ${esc(f.ret)}` : ''}<br>${esc(f.desc || '')}`,
+    kinds: ['Description is wrong or unclear', 'Arguments are wrong or missing', 'Return type is wrong', 'Add an example', 'Other'],
+    commentLabel: 'Your correction', placeholder: 'What should it say?', needComment: true,
+    data: { type: 'function', function: name },
+  });
+}
+function feedbackRule(code) {
+  const r = RULES.find(x => x[1] === code) || ['', code, ''];
+  openFeedback({
+    title: `Comment on ${code}`,
+    context: `<b>${esc(code)}</b> (${r[0] === 'info' ? 'Hint' : r[0] === 'error' ? 'Error' : 'Warning'})<br>${esc(r[2])}`,
+    kinds: ['Severity should be different', 'Rule is wrong in some cases', 'Explanation could be better', 'Other'],
+    commentLabel: 'Your comment', needComment: true,
+    data: { type: 'rule', rule: code },
+  });
+}
+function feedbackNewRule() {
+  openFeedback({
+    title: 'Suggest a new rule',
+    context: 'Which mistake should the checker catch? Real examples from your experience help most. Contributors are credited by name if they want.',
+    commentLabel: 'Describe the mistake and the correct way', needComment: true,
+    placeholder: 'e.g. Calling X inside a loop over all() is slow because… Better: …',
+    data: { type: 'new-rule' },
+  });
+}
+function feedbackGeneral() {
+  openFeedback({
+    title: 'Send feedback',
+    context: 'Ideas, bugs in the page, anything that would make this tool more useful.',
+    kinds: ['Idea', 'Bug in the page', 'Other'],
+    commentLabel: 'Your message', needComment: true,
+    data: { type: 'general' },
+  });
+}
+$('btnMissed').addEventListener('click', feedbackMissed);
+$('btnGeneral').addEventListener('click', feedbackGeneral);
+
+// ---------- boot ----------
+function boot() {
+  measure();
+  const draft = store.get('opal-pg-draft');
+  if (draft && draft.trim()) {
+    ta.value = draft; $('fname').textContent = store.get('opal-pg-file') || 'macro.opal';
+    sel.value = '';
+    run();
+  } else loadExample(0);
+  const t = store.get('opal-pg-tab'); if (t && tabs.includes(t)) selectTab(t);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); syncScroll(); });
+  window.addEventListener('resize', () => { measure(); closeAC(); });
+}
+boot();
+})();
+</script>

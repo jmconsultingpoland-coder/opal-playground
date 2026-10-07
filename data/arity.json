@@ -1,0 +1,713 @@
+{
+ "names": [
+  "Abs",
+  "ActivateSubWindow",
+  "Average",
+  "CFormatter",
+  "Ceil",
+  "CleanupTemplate",
+  "ContextExists",
+  "CreateGraphArc",
+  "CreateGraphNode",
+  "DisableProgressBar",
+  "EnableProgressBar",
+  "EndProfilerAction",
+  "FilterGreaterOrEqual",
+  "FilterLessOrEqual",
+  "FilterWithExpression",
+  "FullRegenerate",
+  "GetActiveContextId",
+  "GetActiveSubWindow",
+  "GetActiveWindow",
+  "GetBooleanInputDialogParam",
+  "GetCheckableListInputDialogParam",
+  "GetConversionMode",
+  "GetDateInputDialogParam",
+  "GetEnumerationInputDialogParam",
+  "GetEnvironment",
+  "GetFloatInputDialogParam",
+  "GetInputDialogParam",
+  "GetJobStatus",
+  "GetPropertyAsDate",
+  "GetPropertyAsInteger",
+  "GetPropertyAsString",
+  "GetStringInputDialogParam",
+  "GetStrongReferenceInputDialogParam",
+  "GetTriggerFilename",
+  "GetUTCTimeZone",
+  "HasProperty",
+  "IndexOf",
+  "InputDialog",
+  "Interrupt",
+  "IsJobRunning",
+  "IsProcedureRunning",
+  "LocateSubWindow",
+  "Lpad",
+  "Match",
+  "Mod",
+  "OpenContext",
+  "RefreshAndSave",
+  "RefreshWindow",
+  "RemoveDuplicates",
+  "RemoveDuplicatesFaster",
+  "ReorderVector",
+  "ReplaceRegular",
+  "Right",
+  "Rpad",
+  "SQLExecute",
+  "Save",
+  "SetEnvironment",
+  "SetGraphArcObject",
+  "SetGraphNodeObject",
+  "SetProgressBarPct",
+  "SetProgressBarSectionName",
+  "SetProperty",
+  "SortAscending",
+  "SortDescending",
+  "SortMultipleVectors",
+  "SortVector",
+  "SphericalDistance",
+  "StartProfilerAction",
+  "Sum",
+  "ToColor",
+  "TranslateEnvStrings"
+ ],
+ "ar": {
+  "getvalue": [
+   2,
+   null
+  ],
+  "writemessage": [
+   1,
+   2
+  ],
+  "translate": [
+   1,
+   2
+  ],
+  "size": [
+   1,
+   1
+  ],
+  "setvalue": [
+   3,
+   3
+  ],
+  "currentdate": [
+   0,
+   0
+  ],
+  "filterwithvalue": [
+   3,
+   null
+  ],
+  "todatestring": [
+   2,
+   4
+  ],
+  "getsetting": [
+   1,
+   1
+  ],
+  "all": [
+   1,
+   1
+  ],
+  "tostring": [
+   1,
+   2
+  ],
+  "stringtostringvector": [
+   1,
+   null
+  ],
+  "toupper": [
+   1,
+   1
+  ],
+  "todate": [
+   1,
+   null
+  ],
+  "substring": [
+   3,
+   3
+  ],
+  "stringvectortostring": [
+   1,
+   3
+  ],
+  "hasattribute": [
+   2,
+   2
+  ],
+  "tofloat": [
+   1,
+   2
+  ],
+  "todurationstring": [
+   2,
+   2
+  ],
+  "writetofile": [
+   2,
+   2
+  ],
+  "tointeger": [
+   1,
+   2
+  ],
+  "attachobject": [
+   1,
+   null
+  ],
+  "isblank": [
+   1,
+   1
+  ],
+  "createobject": [
+   1,
+   1
+  ],
+  "isoption": [
+   1,
+   1
+  ],
+  "getlinevalues": [
+   4,
+   null
+  ],
+  "instring": [
+   2,
+   null
+  ],
+  "deleteobjects": [
+   1,
+   1
+  ],
+  "getyear": [
+   1,
+   null
+  ],
+  "addrelativeduration": [
+   3,
+   null
+  ],
+  "showpopup": [
+   1,
+   1
+  ],
+  "ispyramidvalid": [
+   1,
+   1
+  ],
+  "parsepyramid": [
+   1,
+   1
+  ],
+  "getmonth": [
+   1,
+   null
+  ],
+  "max": [
+   1,
+   null
+  ],
+  "getlinevalue": [
+   3,
+   null
+  ],
+  "hasobjecttype": [
+   1,
+   1
+  ],
+  "filterexcludingvalue": [
+   3,
+   null
+  ],
+  "setqueryparameter": [
+   3,
+   3
+  ],
+  "pyramidnodegetobjects": [
+   1,
+   1
+  ],
+  "objecttype": [
+   1,
+   1
+  ],
+  "deleteobject": [
+   1,
+   1
+  ],
+  "closefile": [
+   1,
+   1
+  ],
+  "replacestring": [
+   3,
+   null
+  ],
+  "round": [
+   1,
+   2
+  ],
+  "opentextfileforwrite": [
+   2,
+   null
+  ],
+  "getdayofmonth": [
+   1,
+   null
+  ],
+  "format": [
+   2,
+   null
+  ],
+  "getdayofweek": [
+   1,
+   null
+  ],
+  "convertunit": [
+   3,
+   null
+  ],
+  "min": [
+   1,
+   null
+  ],
+  "dir": [
+   1,
+   2
+  ],
+  "locate": [
+   1,
+   null
+  ],
+  "runopal": [
+   1,
+   null
+  ],
+  "left": [
+   2,
+   2
+  ],
+  "deletefile": [
+   1,
+   1
+  ],
+  "getsettings": [
+   1,
+   1
+  ],
+  "getoption": [
+   1,
+   1
+  ],
+  "getintegervalue": [
+   2,
+   2
+  ],
+  "getcurrentforecastgroupid": [
+   0,
+   0
+  ],
+  "cloneobject": [
+   1,
+   1
+  ],
+  "toboolean": [
+   2,
+   2
+  ],
+  "copyversionline": [
+   3,
+   null
+  ],
+  "executetemplate": [
+   0,
+   null
+  ],
+  "getsaleshistory": [
+   1,
+   null
+  ],
+  "uploadfile": [
+   3,
+   null
+  ],
+  "isvalidunitconversion": [
+   2,
+   null
+  ],
+  "ask": [
+   1,
+   null
+  ],
+  "filterless": [
+   3,
+   null
+  ],
+  "trim": [
+   1,
+   1
+  ],
+  "gethour": [
+   1,
+   null
+  ],
+  "getfloatvalue": [
+   2,
+   2
+  ],
+  "isinteger": [
+   1,
+   1
+  ],
+  "filtergreater": [
+   3,
+   null
+  ],
+  "getweek": [
+   1,
+   null
+  ],
+  "copyfile": [
+   3,
+   3
+  ],
+  "lockpyramidnode": [
+   1,
+   2
+  ],
+  "getbucket": [
+   2,
+   3
+  ],
+  "isnodelocked": [
+   1,
+   1
+  ],
+  "sleep": [
+   1,
+   1
+  ],
+  "exists": [
+   1,
+   1
+  ],
+  "executequery": [
+   1,
+   null
+  ],
+  "getpivotfloatfact": [
+   2,
+   2
+  ],
+  "getforecastitems": [
+   1,
+   1
+  ],
+  "refreshforecastingviewsneeded": [
+   0,
+   null
+  ],
+  "showinfopanel": [
+   2,
+   null
+  ],
+  "refreshforms": [
+   1,
+   1
+  ],
+  "getweekyear": [
+   1,
+   null
+  ],
+  "toduration": [
+   1,
+   2
+  ],
+  "selectempty": [
+   1,
+   1
+  ],
+  "setselectionobjectinstances": [
+   2,
+   2
+  ],
+  "isemptyselection": [
+   1,
+   1
+  ],
+  "evaluateintegerexpression": [
+   1,
+   null
+  ],
+  "getcategorystring": [
+   1,
+   1
+  ],
+  "copyobject": [
+   2,
+   2
+  ],
+  "ispanelvisible": [
+   0,
+   null
+  ],
+  "rebuild": [
+   1,
+   1
+  ],
+  "getminute": [
+   1,
+   null
+  ],
+  "getsecond": [
+   1,
+   null
+  ],
+  "isvalid": [
+   1,
+   1
+  ],
+  "askenumerated": [
+   1,
+   null
+  ],
+  "getcategories": [
+   1,
+   1
+  ],
+  "setlinevalue": [
+   4,
+   null
+  ],
+  "isfloat": [
+   1,
+   1
+  ],
+  "exit": [
+   1,
+   1
+  ],
+  "setselectionbuckets": [
+   3,
+   3
+  ],
+  "clearlinevalues": [
+   4,
+   null
+  ],
+  "assert": [
+   2,
+   2
+  ],
+  "clearlinevalue": [
+   3,
+   null
+  ],
+  "askdata": [
+   3,
+   4
+  ],
+  "setbreakdownweights": [
+   1,
+   null
+  ],
+  "evaluatestringexpression": [
+   1,
+   null
+  ],
+  "isfileopen": [
+   1,
+   1
+  ],
+  "changeofmonth": [
+   3,
+   null
+  ],
+  "exitapplication": [
+   0,
+   1
+  ],
+  "filterwithfilter": [
+   2,
+   3
+  ],
+  "runallocationcycle": [
+   1,
+   null
+  ],
+  "getcellvaluestatus": [
+   1,
+   1
+  ],
+  "getlicenseoption": [
+   2,
+   2
+  ],
+  "getbucketseries": [
+   2,
+   2
+  ],
+  "isfixedforecastcell": [
+   3,
+   null
+  ],
+  "editobject": [
+   3,
+   null
+  ],
+  "askstring": [
+   1,
+   3
+  ],
+  "recomputecategories": [
+   1,
+   1
+  ],
+  "objectsreportexecutetask": [
+   1,
+   1
+  ],
+  "fixforecastcell": [
+   3,
+   null
+  ],
+  "datafileexists": [
+   1,
+   1
+  ],
+  "getdatevalue": [
+   2,
+   2
+  ],
+  "getweakreferenceobjects": [
+   2,
+   2
+  ],
+  "filterexcludingregularexpression": [
+   3,
+   3
+  ],
+  "filterwithregularexpression": [
+   3,
+   3
+  ],
+  "objectcategory": [
+   2,
+   2
+  ],
+  "filterwithrange": [
+   4,
+   null
+  ],
+  "setformfocus": [
+   2,
+   3
+  ],
+  "windowtoform": [
+   1,
+   1
+  ],
+  "toicon": [
+   1,
+   1
+  ],
+  "renamefile": [
+   3,
+   3
+  ],
+  "getvalueinunit": [
+   2,
+   null
+  ],
+  "getcellcomments": [
+   1,
+   null
+  ],
+  "getparentcomments": [
+   1,
+   null
+  ],
+  "getchildcomments": [
+   1,
+   null
+  ],
+  "setpyramidfocus": [
+   1,
+   1
+  ],
+  "opendashboard": [
+   1,
+   null
+  ],
+  "getcategorydefs": [
+   1,
+   1
+  ],
+  "tolower": [
+   1,
+   1
+  ],
+  "getbaseforecast": [
+   1,
+   1
+  ],
+  "unfixforecastcell": [
+   3,
+   null
+  ],
+  "runclassification": [
+   0,
+   null
+  ],
+  "runexpertsystem": [
+   1,
+   2
+  ],
+  "runstatisticalengine": [
+   1,
+   2
+  ],
+  "calendarendofperiod": [
+   3,
+   null
+  ],
+  "setsetting": [
+   2,
+   2
+  ],
+  "getfilecontent": [
+   1,
+   null
+  ],
+  "addfilecontent": [
+   2,
+   null
+  ],
+  "getlockinfo": [
+   2,
+   2
+  ],
+  "isdirectory": [
+   1,
+   1
+  ],
+  "askdate": [
+   1,
+   null
+  ],
+  "setdashboardscope": [
+   2,
+   2
+  ],
+  "hideinfopanel": [
+   0,
+   null
+  ]
+ }
+}

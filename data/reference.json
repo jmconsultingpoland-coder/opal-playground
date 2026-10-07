@@ -1,0 +1,6030 @@
+[
+ {
+  "n": "Abs",
+  "d": "Measures a number without retaining its positive or negative sign.",
+  "r": "Number",
+  "o": [
+   [
+    [
+     "Number",
+     "Value",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Float Gap = Abs(SalesQty - ForecastQty);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 0
+ },
+ {
+  "n": "AddFileContent",
+  "d": "Appends text or text lines to the specified file.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ],
+    [
+     "String",
+     "Content",
+     0
+    ],
+    [
+     "Any",
+     "CloseIfOpened",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "File and directory"
+ },
+ {
+  "n": "AddRelativeDuration",
+  "d": "Moves a date forward or backward by a relative time amount.",
+  "r": "Date",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ],
+    [
+     "Number",
+     "Amount",
+     0
+    ],
+    [
+     "String",
+     "Unit",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Date NextMonth = AddRelativeDuration(CurrentDate(), 1, \"MONTH\");",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 78,
+  "hc": "Date and time"
+ },
+ {
+  "n": "All",
+  "d": "Returns every instance of the given object class as a vector, e.g. all products.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectTypeClassName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Vector Object Product Result = All(\"Product\");",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 424
+ },
+ {
+  "n": "Ask",
+  "d": "Opens or displays ask for the current user session.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "Question",
+     0
+    ],
+    [
+     "Any",
+     "Negative",
+     1
+    ],
+    [
+     "Any",
+     "Positive",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Dialogs",
+  "lv": 0,
+  "sv": 1,
+  "u": 12
+ },
+ {
+  "n": "AskData",
+  "d": "Collects several user-entered values in one dialog.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "Title",
+     0
+    ],
+    [
+     "Vector String",
+     "Labels",
+     0
+    ],
+    [
+     "Vector String",
+     "DefaultValues",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Title",
+     0
+    ],
+    [
+     "Vector String",
+     "Labels",
+     0
+    ],
+    [
+     "Vector String",
+     "DefaultValues",
+     0
+    ],
+    [
+     "Integer",
+     "EditWidth",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Dialogs",
+  "lv": 0,
+  "sv": 1,
+  "u": 3,
+  "hc": "Input"
+ },
+ {
+  "n": "AskDate",
+  "d": "Prompts for a date and returns the entered value.",
+  "r": "Date",
+  "o": [
+   [
+    [
+     "String",
+     "Question",
+     0
+    ],
+    [
+     "Any",
+     "DefaultAnswer",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Input"
+ },
+ {
+  "n": "AskEnumerated",
+  "d": "Opens or displays enumerated for the current user session.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "Question",
+     0
+    ],
+    [
+     "Any",
+     "DefaultAnswer",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Dialogs",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Input"
+ },
+ {
+  "n": "AskString",
+  "d": "Prompts for text and returns the entered answer.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "Question",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Question",
+     0
+    ],
+    [
+     "Any",
+     "DefaultAnswer",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Question",
+     0
+    ],
+    [
+     "Any",
+     "DefaultAnswer",
+     0
+    ],
+    [
+     "Integer",
+     "MaxSize",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Question",
+     0
+    ],
+    [
+     "Integer",
+     "MaxSize",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Input"
+ },
+ {
+  "n": "Assert",
+  "d": "Stops evaluation with the supplied message when its condition fails.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Integer",
+     "Condition",
+     0
+    ],
+    [
+     "String",
+     "Message",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 4,
+  "hc": "Application flow"
+ },
+ {
+  "n": "AttachObject",
+  "d": "Attaches a newly created object to the application data space.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "Integer",
+     "ObjectStatus",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Call AttachObject(MyProduct);",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 115,
+  "hc": "Object related"
+ },
+ {
+  "n": "Average",
+  "d": "Returns the mean of the numbers in a vector, or 0 when the vector is empty.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Vector",
+     "InputValues",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "CalculateTimeBreakdown",
+  "d": "Provides time Breakdown for use in OPAL expressions.",
+  "r": "Void",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 2
+ },
+ {
+  "n": "CalendarEndOfPeriod",
+  "d": "Finds when a resource reaches the requested available capacity.",
+  "r": "Date",
+  "o": [
+   [
+    [
+     "Object",
+     "Calendar",
+     0
+    ],
+    [
+     "Date",
+     "StartTime",
+     0
+    ],
+    [
+     "Number",
+     "WantedCapacity",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "Machine",
+     0
+    ],
+    [
+     "Date",
+     "StartTime",
+     0
+    ],
+    [
+     "Number",
+     "WantedCapacity",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "Resource",
+     0
+    ],
+    [
+     "Date",
+     "StartTime",
+     0
+    ],
+    [
+     "Number",
+     "WantedCapacity",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Calendar"
+ },
+ {
+  "n": "Ceil",
+  "d": "Rounds a number up to the next whole number, or up to a given number of decimals when a second argument is passed.",
+  "r": "Number",
+  "o": [
+   [
+    [
+     "Float",
+     "FloatValue",
+     0
+    ]
+   ],
+   [
+    [
+     "Float",
+     "FloatValue",
+     0
+    ],
+    [
+     "Integer",
+     "NofDecimals",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Integer Pallets = Ceil(Qty / PalletSize);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Distribution"
+ },
+ {
+  "n": "CFormatter",
+  "d": "Formats a value using a C-style format specification.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "FormatString",
+     0
+    ],
+    [
+     "Any",
+     "Values",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 1,
+  "ex": "String Msg = CFormatter(\"Removed {0} of {1} rows\", Removed, Total);",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "String"
+ },
+ {
+  "n": "ChangeOfMonth",
+  "d": "Provides of Month for use in OPAL expressions.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ],
+    [
+     "Number",
+     "BeginTolerance",
+     0
+    ],
+    [
+     "Number",
+     "EndTolerance",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 3,
+  "hc": "Date and time"
+ },
+ {
+  "n": "ClearLineValue",
+  "d": "Clears one forecast-line value for a node or item and bucket.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 4
+ },
+ {
+  "n": "ClearLineValues",
+  "d": "Clears forecast-line values across a bucket range.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "FromBucket",
+     0
+    ],
+    [
+     "Object",
+     "ToBucket",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 4
+ },
+ {
+  "n": "CloneObject",
+  "d": "Creates a copy of an existing object instance.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "Object",
+     "ToBeCloneObject",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 16,
+  "hc": "Object related"
+ },
+ {
+  "n": "CloseFile",
+  "d": "Opens or displays file for the current user session.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "AliasName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 42,
+  "hc": "File and directory"
+ },
+ {
+  "n": "ConvertUnit",
+  "d": "Converts the supplied value into unit.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ]
+   ],
+   [
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ],
+    [
+     "Date",
+     "Date",
+     0
+    ]
+   ],
+   [
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ],
+    [
+     "Date",
+     "FromDate",
+     0
+    ],
+    [
+     "Date",
+     "ToDate",
+     0
+    ]
+   ],
+   [
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ],
+    [
+     "String",
+     "ObjectClass",
+     0
+    ],
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 26,
+  "hc": "Conversion"
+ },
+ {
+  "n": "CopyFile",
+  "d": "Copies a file to a new path, with an option to replace an existing file.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ],
+    [
+     "String",
+     "CopyName",
+     0
+    ],
+    [
+     "Integer",
+     "Overwrite",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 10,
+  "hc": "File and directory"
+ },
+ {
+  "n": "CopyObject",
+  "d": "Updates object in the selected OPAL context.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectFrom",
+     0
+    ],
+    [
+     "Object",
+     "ObjectTo",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Object related"
+ },
+ {
+  "n": "CopyVersionLine",
+  "d": "Updates version Line in the selected OPAL context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FromLineDefId",
+     0
+    ],
+    [
+     "String",
+     "ToLineDefId",
+     0
+    ],
+    [
+     "String",
+     "CategoryString",
+     0
+    ],
+    [
+     "Object",
+     "StartBucket",
+     0
+    ],
+    [
+     "Object",
+     "EndBucket",
+     0
+    ],
+    [
+     "Integer",
+     "CopyPastBuckets",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 15
+ },
+ {
+  "n": "CreateObject",
+  "d": "Creates a detached instance of the requested object class.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectClass",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "MyProduct = CreateObject(\"Product\");",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 106,
+  "hc": "Object related"
+ },
+ {
+  "n": "CurrentDate",
+  "d": "Returns the current system date for use in an expression.",
+  "r": "Date",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Date Result = CurrentDate();",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 676,
+  "hc": "Date and time"
+ },
+ {
+  "n": "DataFileExists",
+  "d": "Provides file Exists for use in OPAL expressions.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Object related"
+ },
+ {
+  "n": "DeleteFile",
+  "d": "Removes the file at the supplied path.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 18,
+  "hc": "File and directory"
+ },
+ {
+  "n": "DeleteObject",
+  "d": "Deletes one object instance from the data space.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Call DeleteObject(MyConversion);",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 42,
+  "hc": "Object related"
+ },
+ {
+  "n": "DeleteObjects",
+  "d": "Deletes every object in the supplied vector.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 84,
+  "hc": "Object related"
+ },
+ {
+  "n": "Dir",
+  "d": "Lists file and folder names that match a path or file mask.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "Source",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Source",
+     0
+    ],
+    [
+     "Integer",
+     "Recursive",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 24
+ },
+ {
+  "n": "EditObject",
+  "d": "Provides object for use in OPAL expressions.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectAny",
+     0
+    ],
+    [
+     "String",
+     "Title",
+     0
+    ],
+    [
+     "Vector",
+     "Expressions",
+     0
+    ],
+    [
+     "Any",
+     "CreateMode",
+     1
+    ],
+    [
+     "Any",
+     "TranslateLabels",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Object related"
+ },
+ {
+  "n": "EvaluateIntegerExpression",
+  "d": "Evaluates OPAL code and returns an integer result.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "OPALCode",
+     0
+    ],
+    [
+     "Any",
+     "OPALArgument1",
+     1
+    ],
+    [
+     "Any",
+     "OPALArgument2",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 1,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Application flow"
+ },
+ {
+  "n": "EvaluateStringExpression",
+  "d": "Evaluates OPAL code and returns a text result.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "OPALCode",
+     0
+    ],
+    [
+     "Any",
+     "OPALArgument1",
+     1
+    ],
+    [
+     "Any",
+     "OPALArgument2",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 1,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 3,
+  "hc": "Application flow"
+ },
+ {
+  "n": "ExecuteQuery",
+  "d": "Runs a query and returns its execution status.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectName",
+     0
+    ],
+    [
+     "Any",
+     "AppendToTable",
+     1
+    ],
+    [
+     "Any",
+     "AskInput",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 8,
+  "hc": "Object related"
+ },
+ {
+  "n": "ExecuteTemplate",
+  "d": "Runs the selected template.",
+  "r": "Void",
+  "o": [
+   [],
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "TemplateName",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "TemplateName",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "Vector String",
+     "TemplateNames",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 13,
+  "hc": "Template"
+ },
+ {
+  "n": "Exists",
+  "d": "Checks whether the specified file exists.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 8,
+  "hc": "File and directory"
+ },
+ {
+  "n": "Exit",
+  "d": "Stops the current expression and returns its exit code.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Integer",
+     "ExitCode",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Application flow"
+ },
+ {
+  "n": "ExitApplication",
+  "d": "Closes the application, optionally forcing the exit.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Integer",
+     "Forced",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 3,
+  "hc": "Application flow"
+ },
+ {
+  "n": "FilterExcludingRegularExpression",
+  "d": "Keeps vector objects whose attribute fails a regular-expression match.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Vector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "String",
+     "RegularExpression",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Filter"
+ },
+ {
+  "n": "FilterExcludingValue",
+  "d": "Keeps vector objects whose attribute differs from the supplied value.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Vector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "FilterValue",
+     0
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 59,
+  "hc": "Filter"
+ },
+ {
+  "n": "FilterGreater",
+  "d": "Returns vector entries selected by the greater condition.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 11
+ },
+ {
+  "n": "FilterGreaterOrEqual",
+  "d": "Keeps the objects whose attribute is greater than or equal to a value (text, number, date or enumeration).",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0
+ },
+ {
+  "n": "FilterLess",
+  "d": "Returns vector entries selected by the less condition.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 12
+ },
+ {
+  "n": "FilterLessOrEqual",
+  "d": "Keeps the objects whose attribute is less than or equal to a value (text, number, date or enumeration).",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0
+ },
+ {
+  "n": "FilterWithExpression",
+  "d": "Deprecated. Keeps the objects for which an OPAL condition given as text is true; a For loop with If does the same and is faster.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ],
+    [
+     "String",
+     "Expression",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "dep": "Use a For loop with If instead; it is faster.",
+  "hc": "Filter"
+ },
+ {
+  "n": "FilterWithFilter",
+  "d": "Applies a saved filter to the supplied object vector.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Vector",
+     0
+    ],
+    [
+     "String",
+     "FilterName",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector",
+     "Vector",
+     0
+    ],
+    [
+     "String",
+     "FilterName",
+     0
+    ],
+    [
+     "Integer",
+     "EditFlag",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Filter"
+ },
+ {
+  "n": "FilterWithRange",
+  "d": "Keeps vector objects whose attribute falls within the requested range.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "FromValue",
+     0
+    ],
+    [
+     "Any",
+     "ToValue",
+     0
+    ],
+    [
+     "Any",
+     "RangeType",
+     1
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Filter"
+ },
+ {
+  "n": "FilterWithRegularExpression",
+  "d": "Keeps vector objects whose attribute matches a regular expression.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Vector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "String",
+     "RegularExpression",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Filter"
+ },
+ {
+  "n": "FilterWithValue",
+  "d": "Keeps vector objects whose attribute matches the supplied value.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Vector",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ],
+    [
+     "Integer",
+     "CaseSensitive",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Vector Object Product Active = FilterWithValue(All(\"Product\"), \"Status\", \"ACTIVE\");",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 564,
+  "hc": "Filter"
+ },
+ {
+  "n": "FixForecastCell",
+  "d": "Fixes a forecast value for a node or item in a bucket.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "String",
+     "DataType",
+     0
+    ],
+    [
+     "Any",
+     "PromoDefinition",
+     1
+    ],
+    [
+     "Any",
+     "RequireFullyLockedNode (2",
+     1
+    ]
+   ],
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "Any",
+     "PromoDefinition",
+     1
+    ],
+    [
+     "Any",
+     "RequireFullyLockedNode",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 2
+ },
+ {
+  "n": "Format",
+  "d": "Formats a string or number according to a pattern.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "StringValue",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ]
+   ],
+   [
+    [
+     "Integer",
+     "IntegerValue",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ]
+   ],
+   [
+    [
+     "Integer",
+     "IntegerValue",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ],
+    [
+     "String",
+     "ThousandSeparator",
+     0
+    ]
+   ],
+   [
+    [
+     "Integer",
+     "IntegerValue",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ],
+    [
+     "Integer",
+     "UseDefaultThousandSeparator",
+     0
+    ]
+   ],
+   [
+    [
+     "Number",
+     "FloatValue",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 33,
+  "hc": "Conversion"
+ },
+ {
+  "n": "GetActiveProfile",
+  "d": "Returns the profile currently active in the application.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetActiveProfile();",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 670,
+  "hc": "Configuration"
+ },
+ {
+  "n": "GetActiveProfileGroup",
+  "d": "Returns the profile group of the user who is logged in.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Configuration"
+ },
+ {
+  "n": "GetActiveUser",
+  "d": "Retrieves active User from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetActiveUser();",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Configuration"
+ },
+ {
+  "n": "GetAskResult",
+  "d": "Retrieves ask Result from the current application context.",
+  "r": "Enum",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Dialogs",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Input"
+ },
+ {
+  "n": "GetBaseForecast",
+  "d": "Returns base-forecast values for a forecast node or item.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "GetBucket",
+  "d": "Finds the bucket that corresponds to a date or bucket reference.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "Integer",
+     "Offset",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "BucketSeries",
+     0
+    ],
+    [
+     "String",
+     "AggrHorizonId",
+     0
+    ],
+    [
+     "Integer",
+     "AggrBucketNo",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "BucketSeries",
+     0
+    ],
+    [
+     "Integer",
+     "BucketNo",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "BucketSeries",
+     0
+    ],
+    [
+     "Date",
+     "Date",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 9,
+  "hc": "Bucketing"
+ },
+ {
+  "n": "GetBucketSeries",
+  "d": "Returns the bucket series for a horizon and reference date.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "String",
+     "BucketHorizonId",
+     0
+    ],
+    [
+     "Date",
+     "ReferenceDate",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Bucketing"
+ },
+ {
+  "n": "GetCategories",
+  "d": "Retrieves categories from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "CategoryString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetCategoryDefs",
+  "d": "Retrieves category Defs from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "CategoryString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetCategoryString",
+  "d": "Retrieves category String from the current application context.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetCellComments",
+  "d": "Retrieves cell Comments from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "Cell",
+     0
+    ],
+    [
+     "Any",
+     "\"DD MMM YY\"",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Comments"
+ },
+ {
+  "n": "GetCellValueStatus",
+  "d": "Returns the validation messages associated with a planning cell.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "Cell",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Comments"
+ },
+ {
+  "n": "GetChildComments",
+  "d": "Retrieves child Comments from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "Cell",
+     0
+    ],
+    [
+     "Any",
+     "\"DD MMM YY\"",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Comments"
+ },
+ {
+  "n": "GetCurrentDirectory",
+  "d": "Retrieves current Directory from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetCurrentDirectory();",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "File and directory"
+ },
+ {
+  "n": "GetCurrentForecastCycleId",
+  "d": "Retrieves current Forecast Cycle Id from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 4
+ },
+ {
+  "n": "GetCurrentForecastGroupId",
+  "d": "Retrieves current Forecast Group Id from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 16
+ },
+ {
+  "n": "GetDateValue",
+  "d": "Retrieves date Value from the current application context.",
+  "r": "Date",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "Attribute",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetDayOfMonth",
+  "d": "Returns the day number within a date’s month.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetDayOfMonth(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 36,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetDayOfWeek",
+  "d": "Returns the weekday number for a date.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 31,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetExpressionLine",
+  "d": "Returns the current expression line number.",
+  "r": "Integer",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Integer Result = GetExpressionLine();",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 126,
+  "hc": "Application flow"
+ },
+ {
+  "n": "GetExpressionName",
+  "d": "Returns the name of the expression currently running.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetExpressionName();",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 316,
+  "hc": "Application flow"
+ },
+ {
+  "n": "GetFileContent",
+  "d": "Reads a file and returns its text as a vector of lines.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ],
+    [
+     "Any",
+     "CloseIfOpened",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "File and directory"
+ },
+ {
+  "n": "GetFloatValue",
+  "d": "Retrieves float Value from the current application context.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "Attribute",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 11,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetForecastItems",
+  "d": "Retrieves forecast Items from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "Category",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 7
+ },
+ {
+  "n": "GetHour",
+  "d": "Returns the hour component of a date-time value.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetHour(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 11,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetIntegerValue",
+  "d": "Retrieves integer Value from the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "Attribute",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 17,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetLicenseOption",
+  "d": "Checks the licensed state of an application option for a product.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "ProductId",
+     0
+    ],
+    [
+     "String",
+     "OptionName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Settings",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Application flow"
+ },
+ {
+  "n": "GetLineValue",
+  "d": "Reads one forecast-line value for a node or item and bucket.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 67
+ },
+ {
+  "n": "GetLineValues",
+  "d": "Reads a forecast-line range for a node or item across buckets.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "FromBucket",
+     0
+    ],
+    [
+     "Object",
+     "ToBucket",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Vector Float Sales = GetLineValues(\"Sales History\", ForecastItem, FromBucket, ToBucket);",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 103
+ },
+ {
+  "n": "GetLocalizedDateFormat",
+  "d": "Retrieves localized Date Format from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetLocalizedDateFormat();",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 11,
+  "hc": "Conversion"
+ },
+ {
+  "n": "GetLocalizedDateTimeFormat",
+  "d": "Retrieves localized Date Time Format from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetLocalizedDateTimeFormat();",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 363,
+  "hc": "Conversion"
+ },
+ {
+  "n": "GetLocalizedDecimalPointCharacter",
+  "d": "Retrieves localized Decimal Point Character from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetLocalizedDecimalPointCharacter();",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 8,
+  "hc": "Conversion"
+ },
+ {
+  "n": "GetLocalizedThousandSeparator",
+  "d": "Retrieves localized Thousand Separator from the current application context.",
+  "r": "String",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Result = GetLocalizedThousandSeparator();",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Conversion"
+ },
+ {
+  "n": "GetLockInfo",
+  "d": "Retrieves lock Info from the current application context.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Integer",
+     "Lock",
+     0
+    ],
+    [
+     "String",
+     "InfoType",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Application flow"
+ },
+ {
+  "n": "GetMinute",
+  "d": "Returns the minute component of a date-time value.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetMinute(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetMonth",
+  "d": "Returns the month number within a date.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetMonth(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 74,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetOption",
+  "d": "Retrieves option from the current application context.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Any",
+     "CommandLine",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Settings",
+  "lv": 0,
+  "sv": 1,
+  "u": 17,
+  "hc": "Application flow"
+ },
+ {
+  "n": "GetParentComments",
+  "d": "Retrieves parent Comments from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "Cell",
+     0
+    ],
+    [
+     "Any",
+     "\"DD MMM YY\"",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Comments"
+ },
+ {
+  "n": "GetPivotFloatFact",
+  "d": "Retrieves pivot Float Fact from the current application context.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "String",
+     "Field",
+     0
+    ],
+    [
+     "String",
+     "Operation",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 8,
+  "hc": "Pivot"
+ },
+ {
+  "n": "GetSalesHistory",
+  "d": "Retrieves sales History from the current application context.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "ForecastItem",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector",
+     "ForecastItems",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 13
+ },
+ {
+  "n": "GetSecond",
+  "d": "Returns the second component of a date-time value.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetSecond(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetSetting",
+  "d": "Reads the configured value for a named setting.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "PossibleSetting",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Mode = GetSetting(\"MyProject_RunMode\");",
+  "c": "Settings",
+  "lv": 0,
+  "sv": 1,
+  "u": 457,
+  "hc": "Configuration"
+ },
+ {
+  "n": "GetSettings",
+  "d": "Returns the collection of settings available to the expression.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "SettingName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Settings",
+  "lv": 0,
+  "sv": 1,
+  "u": 17,
+  "hc": "Configuration"
+ },
+ {
+  "n": "GetToDoListConflictDefs",
+  "d": "Returns the conflict definitions currently loaded in the To-Do list. The To-Do list must be open; not available in invisible mode.",
+  "r": "Vector",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Template"
+ },
+ {
+  "n": "GetValue",
+  "d": "Reads an attribute from an object and returns its value as text.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "String Result = GetValue(Product, \"ProductId\");",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 6301,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetValueInUnit",
+  "d": "Retrieves value In Unit from the current application context.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "Attribute",
+     0
+    ],
+    [
+     "String",
+     "Unit",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetWeakReferenceObjects",
+  "d": "Resolves weak-reference text into the referenced objects.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Object related"
+ },
+ {
+  "n": "GetWeek",
+  "d": "Returns the week number that contains a date.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetWeek(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 10,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetWeekYear",
+  "d": "Returns the year associated with a date’s week number.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetWeekYear(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 7,
+  "hc": "Date and time"
+ },
+ {
+  "n": "GetYear",
+  "d": "Returns the year number within a date.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Result = GetYear(CurrentDate());",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 79,
+  "hc": "Date and time"
+ },
+ {
+  "n": "HasAttribute",
+  "d": "Checks whether an object type defines the requested attribute.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectName",
+     0
+    ],
+    [
+     "String",
+     "AttributeName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "If HasAttribute(\"Product\", \"Description\") Then",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 144,
+  "hc": "Object related"
+ },
+ {
+  "n": "HasObjectType",
+  "d": "Checks whether the requested object type exists.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 60,
+  "hc": "Object related"
+ },
+ {
+  "n": "HideInfoPanel",
+  "d": "Hides the selected information panel.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "PanelId",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Info Panel"
+ },
+ {
+  "n": "IndexOf",
+  "d": "Finds where a value sits in a vector. Counting starts at 0, so the first element is at position 0; optional borders limit the search.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Vector",
+     "VectorToBeChecked",
+     0
+    ],
+    [
+     "Any",
+     "VectorElement",
+     0
+    ],
+    [
+     "Integer",
+     "LeftIndex",
+     1
+    ],
+    [
+     "Integer",
+     "RightIndex",
+     1
+    ],
+    [
+     "Integer",
+     "Reversed",
+     1
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Integer Pos = IndexOf(MyCodes, \"B\");",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "InitializeBreakDownWeights",
+  "d": "Recalculates the engine and interactive breakdown weights; returns 1 on success, 0 on failure.",
+  "r": "Integer",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "InString",
+  "d": "Finds the position of a selected occurrence of text within another string.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "StringToCheck",
+     0
+    ],
+    [
+     "String",
+     "SubString",
+     0
+    ],
+    [
+     "Integer",
+     "StartPosition",
+     1
+    ],
+    [
+     "Integer",
+     "Occurrence",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Integer Pos = InString(MyText, \"-\");",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 87,
+  "hc": "String"
+ },
+ {
+  "n": "IsBlank",
+  "d": "Checks whether a string contains only blank characters.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "StringToCheck",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "If IsBlank(MyProduct.Description) Then",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 113,
+  "hc": "String"
+ },
+ {
+  "n": "IsDirectory",
+  "d": "Checks whether a path identifies a directory.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "DirectoryPath",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "File and directory"
+ },
+ {
+  "n": "IsEmptySelection",
+  "d": "Checks whether empty Selection meets the requested condition.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "Selection",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Selection"
+ },
+ {
+  "n": "isFeatureFlagActive",
+  "d": "Returns 1 when the named feature flag is active in this environment, 0 when it is inactive or unknown.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FeatureFlagId",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "If isFeatureFlagActive(\"NewPlanningView\") Then",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "IsFileOpen",
+  "d": "Checks whether a file alias is currently open.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "Alias",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 3,
+  "hc": "File and directory"
+ },
+ {
+  "n": "IsFixedForecastCell",
+  "d": "Checks whether fixed Forecast Cell meets the requested condition.",
+  "r": "Enum",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "String",
+     "DataType",
+     0
+    ],
+    [
+     "Any",
+     "PromoDefinition (2",
+     1
+    ]
+   ],
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "Any",
+     "PromoDefinition",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 2
+ },
+ {
+  "n": "IsFloat",
+  "d": "Checks whether text represents a floating-point value.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "StringToCheck",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Conversion"
+ },
+ {
+  "n": "IsInteger",
+  "d": "Checks whether text represents an integer value.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "StringToCheck",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 11,
+  "hc": "Conversion"
+ },
+ {
+  "n": "IsNodeLocked",
+  "d": "Checks whether node Locked meets the requested condition.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 9
+ },
+ {
+  "n": "IsOption",
+  "d": "Checks whether a named command-line option was supplied.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "CommandLineOption",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "#If IsOption(\"DEBUG\")",
+  "c": "Settings",
+  "lv": 0,
+  "sv": 1,
+  "u": 104,
+  "hc": "Application flow"
+ },
+ {
+  "n": "IsPanelVisible",
+  "d": "Checks whether panel Visible meets the requested condition.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "PanelId",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Info Panel"
+ },
+ {
+  "n": "IsPyramidValid",
+  "d": "Checks whether a pyramid definition is parsed and up to date.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "PyramidId",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 77,
+  "hc": "Pyramid"
+ },
+ {
+  "n": "IsRebuildNeeded",
+  "d": "Checks whether rebuild Needed meets the requested condition.",
+  "r": "Integer",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Application flow"
+ },
+ {
+  "n": "IsValid",
+  "d": "Checks whether valid meets the requested condition.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectToCheck",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Integer Result = IsValid(Product);",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Object related"
+ },
+ {
+  "n": "IsValidUnitConversion",
+  "d": "Checks whether valid Unit Conversion meets the requested condition.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ],
+    [
+     "String",
+     "ObjectClass",
+     0
+    ],
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "FromUnit",
+     0
+    ],
+    [
+     "String",
+     "ToUnit",
+     0
+    ],
+    [
+     "Vector",
+     "ObjectInstances",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 12,
+  "hc": "Conversion"
+ },
+ {
+  "n": "Left",
+  "d": "Returns the requested number of characters from the start of text.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ],
+    [
+     "Integer",
+     "NumberOfCharacters",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 19,
+  "hc": "String"
+ },
+ {
+  "n": "Locate",
+  "d": "Finds an object by its instance or by the supplied key values.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "ObjectTypeName",
+     0
+    ],
+    [
+     "String",
+     "Name",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "ObjectTypeName",
+     0
+    ],
+    [
+     "String",
+     "Key1",
+     0
+    ],
+    [
+     "String",
+     "Key2",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 1,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 23,
+  "hc": "Object related"
+ },
+ {
+  "n": "LockPyramidNode",
+  "d": "Provides pyramid Node for use in OPAL expressions.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ]
+   ],
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Integer",
+     "RefreshNeeded",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 9
+ },
+ {
+  "n": "Lpad",
+  "d": "Adds padding characters to the left side of text up to a requested width.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "StringToPad",
+     0
+    ],
+    [
+     "Integer",
+     "ExpectedLength",
+     0
+    ],
+    [
+     "String",
+     "SymbolToPad",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Matnr = Lpad(MyProduct.ProductId, 18, \"0\");",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "String"
+ },
+ {
+  "n": "Max",
+  "d": "Returns the greatest numeric value from the supplied arguments.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Any",
+     "Value1",
+     0
+    ],
+    [
+     "Any",
+     "Value2",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 1,
+  "ex": "Float Higher = Max(SalesQty, ForecastQty);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 73
+ },
+ {
+  "n": "Min",
+  "d": "Returns the least numeric value from the supplied arguments.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Any",
+     "Value1",
+     0
+    ],
+    [
+     "Any",
+     "Value2",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 1,
+  "ex": "Float Lower = Min(SalesQty, ForecastQty);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 26
+ },
+ {
+  "n": "Mod",
+  "d": "Returns the remainder after dividing one numeric value by another.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Integer",
+     "Value",
+     0
+    ],
+    [
+     "Integer",
+     "Divider",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 0
+ },
+ {
+  "n": "ObjectCategory",
+  "d": "Returns the category assigned to an object by a category definition.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "Object",
+     "CategoryDef",
+     0
+    ],
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Object related"
+ },
+ {
+  "n": "ObjectsReportExecuteTask",
+  "d": "Provides report Execute Task for use in OPAL expressions.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "TaskName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Dialogs",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "GREAT"
+ },
+ {
+  "n": "ObjectType",
+  "d": "Returns the object type name for an instance or vector.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector",
+     "ObjectVector",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String TypeName = ObjectType(MyObject);",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 43,
+  "hc": "Object related"
+ },
+ {
+  "n": "OpenDashboard",
+  "d": "Opens a dashboard and returns its dashboard object.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "String",
+     "DashboardId",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Dashboard"
+ },
+ {
+  "n": "OpenTextFileForWrite",
+  "d": "Opens a named text file for writing and returns its file status.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "AliasName",
+     0
+    ],
+    [
+     "String",
+     "FileName",
+     0
+    ],
+    [
+     "Any",
+     "Encoding",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 39,
+  "hc": "File and directory"
+ },
+ {
+  "n": "ParsePyramid",
+  "d": "Parses the selected pyramid definition.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "PyramidId",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 77,
+  "hc": "Pyramid"
+ },
+ {
+  "n": "PyramidNodeGetObjects",
+  "d": "Returns the objects contained below a pyramid node.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 50,
+  "hc": "Pyramid"
+ },
+ {
+  "n": "Rebuild",
+  "d": "Runs the rebuild task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Integer",
+     "Force",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 5,
+  "hc": "Application flow"
+ },
+ {
+  "n": "RecomputeCategories",
+  "d": "Runs the categories task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "CategoryDef",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "CategoryDefID",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Object related"
+ },
+ {
+  "n": "RefreshForecastingViewsNeeded",
+  "d": "Runs the forecasting Views Needed task in the current application context.",
+  "r": "Integer",
+  "o": [
+   []
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 7
+ },
+ {
+  "n": "RefreshForms",
+  "d": "Runs the forms task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 7,
+  "hc": "Form"
+ },
+ {
+  "n": "RefreshToDoList",
+  "d": "Refreshes the To-Do list from the conflicts tool. The list must be open; not available in invisible mode.",
+  "r": "Void",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Template"
+ },
+ {
+  "n": "RemoveDuplicates",
+  "d": "Returns a vector with repeated entries removed.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Data",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "RenameFile",
+  "d": "Changes a file name and can replace an existing destination.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "CurrentName",
+     0
+    ],
+    [
+     "String",
+     "NewName",
+     0
+    ],
+    [
+     "Integer",
+     "Overwrite",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "File and directory"
+ },
+ {
+  "n": "ReorderVector",
+  "d": "Reorders the elements of a vector according to a requested index sequence.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "InputVector",
+     0
+    ],
+    [
+     "Vector Integer",
+     "IndexesVector",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "ReplaceRegular",
+  "d": "Replaces text matched by a regular expression with replacement text.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "StringToBeReplaced",
+     0
+    ],
+    [
+     "String",
+     "RegularExpression",
+     0
+    ],
+    [
+     "String",
+     "StringToReplace",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Pyramid"
+ },
+ {
+  "n": "ReplaceString",
+  "d": "Replaces matching text or vector entries with new values.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "Original",
+     0
+    ],
+    [
+     "String",
+     "ToBeDeleted",
+     0
+    ],
+    [
+     "String",
+     "ToBeInserted",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector",
+     "OriginalVector",
+     0
+    ],
+    [
+     "String",
+     "ToBeDeleted",
+     0
+    ],
+    [
+     "String",
+     "ToBeInserted",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Original",
+     0
+    ],
+    [
+     "Vector",
+     "ToBeDeletedVector",
+     0
+    ],
+    [
+     "Vector String",
+     "ToBeInsertedVector",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "String Clean = ReplaceString(MyText, \"/\", \"-\");",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 41,
+  "hc": "String"
+ },
+ {
+  "n": "Right",
+  "d": "Returns the requested number of characters from the end of text.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ],
+    [
+     "Integer",
+     "NumberOfCharacters",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "String"
+ },
+ {
+  "n": "Round",
+  "d": "Rounds a floating-point value to the requested number of decimal places.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Number",
+     "Float",
+     0
+    ],
+    [
+     "Integer",
+     "Integer",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Float Rounded = Round(Ratio, 2);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 40,
+  "hc": "Distribution"
+ },
+ {
+  "n": "Rpad",
+  "d": "Adds padding characters to the right side of text up to a requested width.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "StringToPad",
+     0
+    ],
+    [
+     "Integer",
+     "ExpectedLength",
+     0
+    ],
+    [
+     "String",
+     "SymbolToPad",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "String"
+ },
+ {
+  "n": "RunAllocationCycle",
+  "d": "Runs the allocation Cycle task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "AllocCycle / AllocCycleId",
+     0
+    ],
+    [
+     "Any",
+     "FirstObjects",
+     1
+    ],
+    [
+     "Any",
+     "SecondObjects",
+     1
+    ],
+    [
+     "Any",
+     "DataContainerRef",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 2
+ },
+ {
+  "n": "RunClassification",
+  "d": "Runs the classification task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "RunExpertSystem",
+  "d": "Runs the expert System task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ProgressBar",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "RunOPAL",
+  "d": "Executes OPAL code with any supplied arguments.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "OPALCode",
+     0
+    ],
+    [
+     "Any",
+     "OPALArgument1",
+     1
+    ],
+    [
+     "Any",
+     "OPALArgument2",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 1,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 22,
+  "hc": "Application flow"
+ },
+ {
+  "n": "RunStatisticalEngine",
+  "d": "Runs the statistical Engine task in the current application context.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "ProgressBar",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "SelectEmpty",
+  "d": "Returns vector entries selected by the empty condition.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "String",
+     "ObjectName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 6,
+  "hc": "Selection"
+ },
+ {
+  "n": "SetBreakDownWeights",
+  "d": "Stores or updates break Down Weights using the supplied values.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode",
+     0
+    ],
+    [
+     "Integer",
+     "BucketNo",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 3
+ },
+ {
+  "n": "SetDashboardScope",
+  "d": "Sets the object instances included in an open dashboard.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "DashboardId",
+     0
+    ],
+    [
+     "Vector",
+     "Instances",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Dashboard"
+ },
+ {
+  "n": "SetFormFocus",
+  "d": "Stores or updates form Focus using the supplied values.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "Form",
+     0
+    ],
+    [
+     "Object",
+     "Instance",
+     0
+    ],
+    [
+     "Integer",
+     "Activate",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Form"
+ },
+ {
+  "n": "SetLineValue",
+  "d": "Stores a forecast-line value for a node or item and bucket.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 5
+ },
+ {
+  "n": "SetLineValues",
+  "d": "Stores or updates line Values using the supplied values.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "FromBucket",
+     0
+    ],
+    [
+     "Object",
+     "ToBucket",
+     0
+    ],
+    [
+     "Vector",
+     "Values",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 8
+ },
+ {
+  "n": "SetPyramidFocus",
+  "d": "Stores or updates pyramid Focus using the supplied values.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "Mask",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Pyramid"
+ },
+ {
+  "n": "SetQueryParameter",
+  "d": "Sets a parameter value on a query object.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "QueryObjectName",
+     0
+    ],
+    [
+     "String",
+     "ParameterName",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 56,
+  "hc": "Object related"
+ },
+ {
+  "n": "SetSelectionBuckets",
+  "d": "Sets the first and last buckets for a selection.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Object",
+     "Selection",
+     0
+    ],
+    [
+     "Object",
+     "StartBucket",
+     0
+    ],
+    [
+     "Object",
+     "EndBucket",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 4,
+  "hc": "Selection"
+ },
+ {
+  "n": "SetSelectionObjectInstances",
+  "d": "Stores or updates selection Object Instances using the supplied values.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Object",
+     "Selection",
+     0
+    ],
+    [
+     "Vector",
+     "VectorOfObjects",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Objects",
+  "lv": 0,
+  "sv": 1,
+  "u": 6
+ },
+ {
+  "n": "SetSetting",
+  "d": "Creates or updates a setting with the supplied value.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "SettingName",
+     0
+    ],
+    [
+     "Any",
+     "SettingValue",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Settings",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "Configuration"
+ },
+ {
+  "n": "SetValue",
+  "d": "Stores a new value in the selected attribute of an object.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "Object",
+     "ObjectInstance",
+     0
+    ],
+    [
+     "String",
+     "Attribute",
+     0
+    ],
+    [
+     "Any",
+     "Value",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Call SetValue(MyProduct, \"Description\", \"Obsolete\");",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1120,
+  "hc": "Object related"
+ },
+ {
+  "n": "ShowInfoPanel",
+  "d": "Opens or displays info Panel for the current user session.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "DashboardId",
+     0
+    ],
+    [
+     "String",
+     "Title",
+     0
+    ],
+    [
+     "String",
+     "PanelId",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 7,
+  "hc": "Info Panel"
+ },
+ {
+  "n": "ShowPopup",
+  "d": "Displays a message in a popup window.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "Text",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Dialogs",
+  "lv": 0,
+  "sv": 1,
+  "u": 77,
+  "hc": "Message"
+ },
+ {
+  "n": "Size",
+  "d": "Counts the characters in text or the elements in a vector.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector",
+     "InputVector",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Integer Count = Size(MyProducts);",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 1158,
+  "hc": "String"
+ },
+ {
+  "n": "Sleep",
+  "d": "Provides sleep for use in OPAL expressions.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "Duration",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 9,
+  "hc": "Application flow"
+ },
+ {
+  "n": "SortAscending",
+  "d": "Sorts a vector of numbers, texts or dates from low to high. A named argument controls case sensitivity for texts.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "InputVector",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "SortDescending",
+  "d": "Sorts a vector of numbers, texts or dates from high to low. A named argument controls case sensitivity for texts.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "InputVector",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "SortVector",
+  "d": "Sorts a vector of objects by one or more attributes given as texts, e.g. [\"ProductId\", \"LocationId\"].",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Input",
+     0
+    ],
+    [
+     "Vector String",
+     "Criteria",
+     0
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "MyProducts = SortVector(MyProducts, [\"ProductId\"]);",
+  "c": "Vectors",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ },
+ {
+  "n": "StartPropagateBuffering",
+  "d": "Begins buffering propagation so repeated updates can be applied together.",
+  "r": "Void",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 12,
+  "hc": "Application flow"
+ },
+ {
+  "n": "StopPropagateBuffering",
+  "d": "Ends propagation buffering and applies the queued updates.",
+  "r": "Void",
+  "o": [
+   []
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 12,
+  "hc": "Application flow"
+ },
+ {
+  "n": "StringToStringVector",
+  "d": "Splits text into vector elements using a separator and escape character.",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ],
+    [
+     "Any",
+     "Separator (3",
+     1
+    ]
+   ],
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ],
+    [
+     "String",
+     "Separator",
+     1
+    ],
+    [
+     "Any",
+     "EscapeCharacter",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Vector String Parts = StringToStringVector(\"A;B;C\", \";\");",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 256,
+  "hc": "Conversion"
+ },
+ {
+  "n": "StringVectorToString",
+  "d": "Joins string-vector elements into text with a chosen separator.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Vector String",
+     "InputVectorString",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector String",
+     "InputVectorString",
+     0
+    ],
+    [
+     "String",
+     "Separator",
+     0
+    ]
+   ],
+   [
+    [
+     "Vector String",
+     "InputVectorString",
+     0
+    ],
+    [
+     "String",
+     "Separator",
+     0
+    ],
+    [
+     "String",
+     "EscapeChar",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Joined = StringVectorToString(Parts, \", \");",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 144,
+  "hc": "Conversion"
+ },
+ {
+  "n": "SubString",
+  "d": "Extracts a section of text using a starting position and character count.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ],
+    [
+     "Integer",
+     "StartPos",
+     0
+    ],
+    [
+     "Integer",
+     "Length",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Prefix = SubString(MyProduct.ProductId, 0, 3);",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 148,
+  "hc": "String"
+ },
+ {
+  "n": "Sum",
+  "d": "Adds up all numbers in a vector; returns a Float or an Integer depending on the vector.",
+  "r": "Number",
+  "o": [
+   [
+    [
+     "Vector",
+     "Values",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Float Total = Sum(Sales);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 0
+ },
+ {
+  "n": "ToBoolean",
+  "d": "Converts a value to the integer representation used for true or false.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "String",
+     0
+    ],
+    [
+     "Any",
+     "DefaultValue",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 16,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToColor",
+  "d": "Builds a colour from red, green and blue (0-255), or from hue (0-360), saturation and value (0-1).",
+  "r": "Color",
+  "o": [
+   [
+    [
+     "Integer",
+     "Red",
+     0
+    ],
+    [
+     "Integer",
+     "Green",
+     0
+    ],
+    [
+     "Integer",
+     "Blue",
+     0
+    ]
+   ],
+   [
+    [
+     "Float",
+     "Hue",
+     0
+    ],
+    [
+     "Float",
+     "Saturation",
+     0
+    ],
+    [
+     "Float",
+     "Value",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Color Warning = ToColor(255, 191, 0);",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToDate",
+  "d": "Builds a date from calendar fields or parses date text.",
+  "r": "Date",
+  "o": [
+   [
+    [
+     "Integer",
+     "Day",
+     0
+    ],
+    [
+     "Integer",
+     "Month",
+     0
+    ],
+    [
+     "Integer",
+     "Year",
+     0
+    ]
+   ],
+   [
+    [
+     "Integer",
+     "Day",
+     0
+    ],
+    [
+     "Integer",
+     "Month",
+     0
+    ],
+    [
+     "Integer",
+     "Year",
+     0
+    ],
+    [
+     "String",
+     "TimeZoneId",
+     0
+    ]
+   ],
+   [
+    [
+     "Integer",
+     "Day",
+     0
+    ],
+    [
+     "Integer",
+     "Month",
+     0
+    ],
+    [
+     "Integer",
+     "Year",
+     0
+    ],
+    [
+     "Integer",
+     "Hour",
+     0
+    ],
+    [
+     "Integer",
+     "Minute",
+     0
+    ],
+    [
+     "Integer",
+     "Second",
+     0
+    ]
+   ],
+   [
+    [
+     "Integer",
+     "Day",
+     0
+    ],
+    [
+     "Integer",
+     "Month",
+     0
+    ],
+    [
+     "Integer",
+     "Year",
+     0
+    ],
+    [
+     "Integer",
+     "Hour",
+     0
+    ],
+    [
+     "Integer",
+     "Minute",
+     0
+    ],
+    [
+     "Integer",
+     "Second",
+     0
+    ],
+    [
+     "String",
+     "TimeZoneId",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Text",
+     0
+    ],
+    [
+     "Object",
+     "Form",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "Date FirstOfYear = ToDate(1, 1, 2026);",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 186,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToDateString",
+  "d": "Formats a date as text, optionally using a time zone.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ]
+   ],
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ],
+    [
+     "String",
+     "Translate",
+     0
+    ]
+   ],
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ],
+    [
+     "String",
+     "TimeZoneId",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ]
+   ],
+   [
+    [
+     "Date",
+     "InputDate",
+     0
+    ],
+    [
+     "String",
+     "TimeZoneId",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ],
+    [
+     "String",
+     "Translate",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Txt = ToDateString(CurrentDate(), \"DD-MM-YYYY\");",
+  "c": "Date and time",
+  "lv": 0,
+  "sv": 1,
+  "u": 479,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToDuration",
+  "d": "Converts a numeric value or text to a duration.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "Text",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Text",
+     0
+    ],
+    [
+     "Any",
+     "DefaultValue",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 7,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToDurationString",
+  "d": "Formats a duration, supplied in seconds, as text.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Integer",
+     "InputInteger",
+     0
+    ],
+    [
+     "String",
+     "FormatString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 141,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToFloat",
+  "d": "Parses text or converts an integer into a floating-point number.",
+  "r": "Float",
+  "o": [
+   [
+    [
+     "Integer",
+     "InputInteger",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "StringValue",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "StringValue",
+     0
+    ],
+    [
+     "Any",
+     "DefaultValue",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Float Qty = ToFloat(\"12.5\");",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 142,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToIcon",
+  "d": "Converts an icon name to an OPAL icon value.",
+  "r": "Icon",
+  "o": [
+   [
+    [
+     "String",
+     "IconName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToInteger",
+  "d": "Converts numeric or textual input to an integer value.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Number",
+     "Float",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "StringValue",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "StringValue",
+     0
+    ],
+    [
+     "Any",
+     "DefaultValue",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Integer Weeks = ToInteger(Days / 7);",
+  "c": "Numbers",
+  "lv": 0,
+  "sv": 1,
+  "u": 137,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToLower",
+  "d": "Changes uppercase letters in text to lowercase.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Code = ToLower(MyProduct.ProductId);",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 1,
+  "hc": "String"
+ },
+ {
+  "n": "ToString",
+  "d": "Converts a supported value to text, with time-zone handling for dates.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "Any",
+     "Value",
+     0
+    ]
+   ],
+   [
+    [
+     "Date",
+     "Date",
+     0
+    ],
+    [
+     "String",
+     "TimeZoneId",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Txt = ToString(Total);",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 281,
+  "hc": "Conversion"
+ },
+ {
+  "n": "ToUpper",
+  "d": "Changes lowercase letters in text to uppercase.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Code = ToUpper(MyProduct.ProductId);",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 192,
+  "hc": "String"
+ },
+ {
+  "n": "Translate",
+  "d": "Returns the localized text for a source string, optionally in a context.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Context",
+     0
+    ],
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Call WriteMessage(Translate(\"Calculation finished\"), MESSAGE_NOTE);",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1171,
+  "hc": "Application flow"
+ },
+ {
+  "n": "Trim",
+  "d": "Removes surrounding whitespace from text.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "InputString",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "String Clean = Trim(MyText);",
+  "c": "Strings",
+  "lv": 0,
+  "sv": 1,
+  "u": 11,
+  "hc": "String"
+ },
+ {
+  "n": "UnFixForecastCell",
+  "d": "Releases a fixed forecast value for a node or item in a bucket.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "String",
+     "DataType",
+     0
+    ],
+    [
+     "Any",
+     "PromoDefinition",
+     1
+    ],
+    [
+     "Any",
+     "RequireFullyLockedNode (2",
+     1
+    ]
+   ],
+   [
+    [
+     "String",
+     "LineSchemeLineDefId",
+     0
+    ],
+    [
+     "Object",
+     "PyramidNode/ForecastItem",
+     0
+    ],
+    [
+     "Object",
+     "Bucket",
+     0
+    ],
+    [
+     "Any",
+     "PromoDefinition",
+     1
+    ],
+    [
+     "Any",
+     "RequireFullyLockedNode",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Forecasting",
+  "lv": 0,
+  "sv": 1,
+  "u": 1
+ },
+ {
+  "n": "UpLoadFile",
+  "d": "Provides load File for use in OPAL expressions.",
+  "r": "Integer",
+  "o": [
+   [
+    [
+     "String",
+     "FileName",
+     0
+    ],
+    [
+     "String",
+     "ObjectClass",
+     0
+    ],
+    [
+     "Integer",
+     "Mode",
+     0
+    ],
+    [
+     "Integer",
+     "ObjectStatus",
+     1
+    ]
+   ]
+  ],
+  "na": 1,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 12
+ },
+ {
+  "n": "WindowToForm",
+  "d": "Provides to Form for use in OPAL expressions.",
+  "r": "Object",
+  "o": [
+   [
+    [
+     "Object",
+     "Window",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 2,
+  "hc": "Form"
+ },
+ {
+  "n": "WriteMessage",
+  "d": "Adds text to the message viewer, optionally under a sheet name.",
+  "r": "String",
+  "o": [
+   [
+    [
+     "String",
+     "Message",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Message",
+     0
+    ],
+    [
+     "String",
+     "SheetName",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "Call WriteMessage(\"Cleanup finished: \" + ToString(Removed) + \" rows\", MESSAGE_NOTE);",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 1853,
+  "hc": "Message"
+ },
+ {
+  "n": "WriteToFile",
+  "d": "Writes text or a vector of text lines to an open file.",
+  "r": "Void",
+  "o": [
+   [
+    [
+     "String",
+     "Alias",
+     0
+    ],
+    [
+     "String",
+     "String",
+     0
+    ]
+   ],
+   [
+    [
+     "String",
+     "Alias",
+     0
+    ],
+    [
+     "Vector String",
+     "StringVector",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Files",
+  "lv": 0,
+  "sv": 1,
+  "u": 138,
+  "hc": "File and directory"
+ },
+ {
+  "n": "RemoveDuplicatesFaster",
+  "d": "",
+  "r": "Vector",
+  "o": [
+   [
+    [
+     "Vector",
+     "Data",
+     0
+    ]
+   ]
+  ],
+  "na": 0,
+  "va": 0,
+  "ex": "",
+  "c": "Other",
+  "lv": 0,
+  "sv": 1,
+  "u": 0,
+  "hc": "Vector"
+ }
+]
