@@ -3,7 +3,7 @@
 A browser-based editor for OPAL, the scripting language of the OMP supply-chain planning platform.
 Write a macro, see problems as you type, and look up built-in functions without leaving the page.
 
-**Try it:** open `index.html` in any modern browser, or use the hosted version on GitHub Pages.
+**Try it:** open `index.html` in any modern browser, or use the hosted version on Cloudflare.
 
 ## What it does
 
